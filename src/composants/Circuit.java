@@ -24,4 +24,8 @@ public abstract class Circuit extends Composant {
 
         this.voltage = voltage;
     }
+
+    public Voltage getVoltage(){
+        return voltage;
+    }
 }
