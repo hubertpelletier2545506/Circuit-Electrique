@@ -1,4 +1,5 @@
 package composants;
 
-public class CircuitSerie {
+public class CircuitSerie extends Circuit {
+
 }
