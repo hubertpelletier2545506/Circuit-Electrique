@@ -28,4 +28,14 @@ public abstract class Circuit extends Composant {
     public Voltage getVoltage(){
         return voltage;
     }
+
+    public double calculerAmperage(){
+
+        return voltage.getVoltage()/calculerResistance();
+    }
+
+    public double calculerWattage(){
+
+        return voltage.getVoltage()*calculerAmperage();
+    }
 }
