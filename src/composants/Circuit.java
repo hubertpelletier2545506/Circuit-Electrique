@@ -8,11 +8,13 @@ public abstract class Circuit extends Composant {
 
     protected List<Composant> composants;
     protected Voltage voltage;
+    protected Protection protection;
 
-    public Circuit(List<Composant> composants, Voltage voltage) {
+    public Circuit(List<Composant> composants, Voltage voltage, Protection protection) {
 
         setComposants(composants);
         setVoltage(voltage);
+        setProtection(protection);
     }
 
     public void setComposants(List<Composant> composants) {
@@ -27,6 +29,11 @@ public abstract class Circuit extends Composant {
 
     public Voltage getVoltage(){
         return voltage;
+    }
+
+    public void setProtection(Protection protection){
+
+        this.protection = protection;
     }
 
     public double calculerAmperage(){
