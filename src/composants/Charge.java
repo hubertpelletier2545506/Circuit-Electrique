@@ -6,17 +6,16 @@ import enums.Voltage;
 public class Charge extends Resistance {
     private Voltage voltage;
     private double resistance;
-    private TypeEnergie typeEnergie1;
-    private TypeEnergie typeEnergie2;
+    private TypeEnergie autreTypeEnergie;
     private String nomCharge;
     private int chargeID;
     private static int numCharge = 0;
 
 
-    public Charge(Voltage voltage, double resistance, TypeEnergie typeEnergie1, TypeEnergie typeEnergie2, String nomCharge){
-        super(voltage, resistance, typeEnergie1);
+    public Charge(Voltage voltage, double resistance, TypeEnergie autreTypeEnergie, String nomCharge){
+        super(voltage, resistance);
         setNomCharge(nomCharge);
-        setTypeEnergie2(typeEnergie2);
+        setAutreTypeEnergie(autreTypeEnergie);
 
         Charge.numCharge += 1;
         this.chargeID = numCharge;
@@ -26,8 +25,8 @@ public class Charge extends Resistance {
         this.nomCharge = nomCharge;
     }
 
-    private void setTypeEnergie2(TypeEnergie typeEnergie2){
-        this.typeEnergie2 = typeEnergie2;
+    private void setAutreTypeEnergie(TypeEnergie typeEnergie2){
+        this.autreTypeEnergie = typeEnergie2;
     }
 
 
@@ -39,13 +38,10 @@ public class Charge extends Resistance {
         return resistance;
     }
 
-    public TypeEnergie getTypeEnergie1() {
-        return typeEnergie1;
+    public TypeEnergie getAutreTypeEnergie() {
+        return autreTypeEnergie;
     }
 
-    public TypeEnergie getTypeEnergie2() {
-        return typeEnergie2;
-    }
 
     public String getNomCharge() {
         return nomCharge;
@@ -61,6 +57,6 @@ public class Charge extends Resistance {
 
     @Override
     public String toString() {
-        return this.chargeID + " | " + getNomCharge() + " | " + getResistance() + " Ω | " + getTypeEnergie1() + " | " + getTypeEnergie2() + " | " + getVoltage() + "V";
+        return this.chargeID + " | " + getNomCharge() + " | " + getResistance() + " Ω | " + TYPE_ENERGIE_RESISTANCE + " | " + getAutreTypeEnergie() + " | " + getVoltage() + "V";
     }
 }
