@@ -5,17 +5,22 @@ import enums.Voltage;
 import java.util.List;
 
 public class CircuitSerie extends Circuit {
-    CircuitSerie(List<Composant> composants, Voltage voltage,Protection protection) {
-        super(composants,voltage,protection);
+    CircuitSerie(List<Composant> composants, Voltage voltage, Protection protection,boolean interrupteurAllume) {
+        super(composants, voltage, protection,interrupteurAllume);
     }
 
     @Override
     public double calculerResistance() {
         double resistance = 0;
-        for(Composant composant : composants){
-            resistance += composant.calculerResistance();
+        if (this.interrupteurAllume == false) {
+            return 0;
+        } else {
+            for (Composant composant : composants) {
+                resistance += composant.calculerResistance();
+            }
+
+            return resistance;
         }
 
-        return resistance;
     }
 }

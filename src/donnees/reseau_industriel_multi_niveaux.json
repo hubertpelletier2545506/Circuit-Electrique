@@ -1,0 +1,97 @@
+{
+  "circuit": {
+    "type": "parallele",
+    "voltage": "VOLTAGE_ELEVE",
+    "protection": {
+      "type": "DISJONCTEUR",
+      "valeur": 50
+    },
+    "interrupteurAllume": true,
+    "composants": [
+      {
+        "type": "serie",
+        "voltage": "VOLTAGE_ELEVE",
+        "protection": {
+          "type": "DISJONCTEUR",
+          "valeur": 30
+        },
+        "interrupteurAllume": true,
+        "composants": [
+          {
+            "type": "resistance",
+            "valeur": 15,
+            "typeEnergie": "MECANIQUE"
+          },
+          {
+            "type": "parallele",
+            "voltage": "VOLTAGE_STANDARD",
+            "protection": {
+              "type": "FUSIBLE",
+              "valeur": 20
+            },
+            "interrupteurAllume": true,
+            "composants": [
+              {
+                "type": "resistance",
+                "valeur": 10,
+                "typeEnergie": "THERMIQUE"
+              },
+              {
+                "type": "resistance",
+                "valeur": 20,
+                "typeEnergie": "CHIMIQUE"
+              },
+              {
+                "type": "serie",
+                "voltage": "VOLTAGE_STANDARD",
+                "protection": {
+                  "type": "DISJONCTEUR",
+                  "valeur": 10
+                },
+                "interrupteurAllume": false,
+                "composants": [
+                  {
+                    "type": "resistance",
+                    "valeur": 5,
+                    "typeEnergie": "NUCLEAIRE"
+                  },
+                  {
+                    "type": "resistance",
+                    "valeur": 8,
+                    "typeEnergie": "MECANIQUE"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "resistance",
+            "valeur": 12,
+            "typeEnergie": "RAYONNANTE"
+          }
+        ]
+      },
+      {
+        "type": "serie",
+        "voltage": "VOLTAGE_BAS",
+        "protection": {
+          "type": "FUSIBLE",
+          "valeur": 10
+        },
+        "interrupteurAllume": false,
+        "composants": [
+          {
+            "type": "resistance",
+            "valeur": 4,
+            "typeEnergie": "SONORE"
+          },
+          {
+            "type": "resistance",
+            "valeur": 6,
+            "typeEnergie": "THERMIQUE"
+          }
+        ]
+      }
+    ]
+  }
+}

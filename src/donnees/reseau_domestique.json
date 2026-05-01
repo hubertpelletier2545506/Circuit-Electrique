@@ -1,0 +1,81 @@
+{
+  "circuit": {
+    "type": "serie",
+    "voltage": "VOLTAGE_STANDARD",
+    "protection": {
+      "type": "DISJONCTEUR",
+      "valeur": 20
+    },
+    "interrupteurAllume": true,
+    "composants": [
+      {
+        "type": "resistance",
+        "valeur": 5,
+        "typeEnergie": "THERMIQUE"
+      },
+      {
+        "type": "parallele",
+        "voltage": "VOLTAGE_STANDARD",
+        "protection": {
+          "type": "FUSIBLE",
+          "valeur": 15
+        },
+        "interrupteurAllume": true,
+        "composants": [
+          {
+            "type": "serie",
+            "voltage": "VOLTAGE_STANDARD",
+            "protection": {
+              "type": "DISJONCTEUR",
+              "valeur": 10
+            },
+            "interrupteurAllume": true,
+            "composants": [
+              {
+                "type": "resistance",
+                "valeur": 8,
+                "typeEnergie": "THERMIQUE"
+              },
+              {
+                "type": "resistance",
+                "valeur": 12,
+                "typeEnergie": "MECANIQUE"
+              }
+            ]
+          },
+          {
+            "type": "serie",
+            "voltage": "VOLTAGE_STANDARD",
+            "protection": {
+              "type": "FUSIBLE",
+              "valeur": 5
+            },
+            "interrupteurAllume": false,
+            "composants": [
+              {
+                "type": "resistance",
+                "valeur": 30,
+                "typeEnergie": "RAYONNANTE"
+              },
+              {
+                "type": "resistance",
+                "valeur": 10,
+                "typeEnergie": "THERMIQUE"
+              }
+            ]
+          },
+          {
+            "type": "resistance",
+            "valeur": 25,
+            "typeEnergie": "SONORE"
+          }
+        ]
+      },
+      {
+        "type": "resistance",
+        "valeur": 3,
+        "typeEnergie": "MECANIQUE"
+      }
+    ]
+  }
+}
