@@ -31,6 +31,31 @@ public class Charge extends Resistance {
     }
 
 
+    public Voltage getVoltage() {
+        return voltage;
+    }
 
+    public double getResistance() {
+        return resistance;
+    }
 
+    public TypeEnergie getTypeEnergie1() {
+        return typeEnergie1;
+    }
+
+    public TypeEnergie getTypeEnergie2() {
+        return typeEnergie2;
+    }
+
+    public String getNomCharge() {
+        return nomCharge;
+    }
+
+    public int getChargeID() {
+        return chargeID;
+    }
+
+    public static int getNumCharge() {
+        return numCharge;
+    }
 }
