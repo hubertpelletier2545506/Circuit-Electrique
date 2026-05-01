@@ -9,12 +9,14 @@ public abstract class Circuit extends Composant {
     protected List<Composant> composants;
     protected Voltage voltage;
     protected Protection protection;
+    protected boolean interrupteurAllume;
 
-    public Circuit(List<Composant> composants, Voltage voltage, Protection protection) {
+    public Circuit(List<Composant> composants, Voltage voltage, Protection protection, boolean interrupteurAllume) {
 
         setComposants(composants);
         setVoltage(voltage);
         setProtection(protection);
+        setInterrupteurAllume(interrupteurAllume);
     }
 
     public void setComposants(List<Composant> composants) {
@@ -34,6 +36,11 @@ public abstract class Circuit extends Composant {
     public void setProtection(Protection protection){
 
         this.protection = protection;
+    }
+
+    public void setInterrupteurAllume(boolean interrupteurAllume){
+
+        this.interrupteurAllume = interrupteurAllume;
     }
 
     public double calculerAmperage(){
