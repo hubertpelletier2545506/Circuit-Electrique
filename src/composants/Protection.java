@@ -18,7 +18,7 @@ public class Protection {
             this.amperageMax = amperageMax;
         } else {
 
-            System.out.println("Une protection ne peut pas avoir un ampérage maximal. Nouvelle valeur de l'ampérage maximal: 0");
+            System.out.println("Une protection ne peut pas avoir un ampérage maximal néagtif. Nouvelle valeur de l'ampérage maximal: 0");
             setAmperageMax(0);
         }
     }
