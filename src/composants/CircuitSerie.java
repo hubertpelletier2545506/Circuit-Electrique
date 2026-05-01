@@ -5,8 +5,8 @@ import enums.Voltage;
 import java.util.List;
 
 public class CircuitSerie extends Circuit {
-    CircuitSerie(List<Composant> composants, Voltage voltage, Protection protection) {
-        super(composants, voltage, protection);
+    CircuitSerie(List<Composant> composants, Voltage voltage, Protection protection,boolean interrupteurAllume) {
+        super(composants, voltage, protection,interrupteurAllume);
     }
 
     @Override
