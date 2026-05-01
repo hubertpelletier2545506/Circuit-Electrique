@@ -9,13 +9,17 @@ public class Charge extends Resistance {
     private TypeEnergie typeEnergie1;
     private TypeEnergie typeEnergie2;
     private String nomCharge;
+    private int chargeID;
+    private static int numCharge = 0;
+
 
     public Charge(Voltage voltage, double resistance, TypeEnergie typeEnergie1, TypeEnergie typeEnergie2, String nomCharge){
         super(voltage, resistance, typeEnergie1);
         setNomCharge(nomCharge);
         setTypeEnergie2(typeEnergie2);
 
-
+        Charge.numCharge += 1;
+        this.chargeID = numCharge;
     }
 
     private void setNomCharge(String nomCharge){
@@ -26,8 +30,7 @@ public class Charge extends Resistance {
         this.typeEnergie2 = typeEnergie2;
     }
 
-    public double calculerWattage(){
-        return this.voltage.getVoltage() * (this.voltage.getVoltage()/ this.resistance);
-    }
+
+
 
 }
