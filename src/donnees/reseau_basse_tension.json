@@ -1,0 +1,97 @@
+{
+  "circuit": {
+    "type": "serie",
+    "voltage": "VOLTAGE_BAS",
+    "protection": {
+      "type": "FUSIBLE",
+      "valeur": 8
+    },
+    "interrupteurAllume": true,
+    "composants": [
+      {
+        "type": "resistance",
+        "valeur": 2,
+        "typeEnergie": "CHIMIQUE"
+      },
+      {
+        "type": "parallele",
+        "voltage": "VOLTAGE_BAS",
+        "protection": {
+          "type": "DISJONCTEUR",
+          "valeur": 6
+        },
+        "interrupteurAllume": true,
+        "composants": [
+          {
+            "type": "serie",
+            "voltage": "VOLTAGE_BAS",
+            "protection": {
+              "type": "FUSIBLE",
+              "valeur": 4
+            },
+            "interrupteurAllume": true,
+            "composants": [
+              {
+                "type": "resistance",
+                "valeur": 3,
+                "typeEnergie": "SONORE"
+              },
+              {
+                "type": "parallele",
+                "voltage": "VOLTAGE_BAS",
+                "protection": {
+                  "type": "DISJONCTEUR",
+                  "valeur": 3
+                },
+                "interrupteurAllume": true,
+                "composants": [
+                  {
+                    "type": "resistance",
+                    "valeur": 6,
+                    "typeEnergie": "THERMIQUE"
+                  },
+                  {
+                    "type": "resistance",
+                    "valeur": 9,
+                    "typeEnergie": "MECANIQUE"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "resistance",
+            "valeur": 15,
+            "typeEnergie": "RAYONNANTE"
+          },
+          {
+            "type": "serie",
+            "voltage": "VOLTAGE_BAS",
+            "protection": {
+              "type": "FUSIBLE",
+              "valeur": 2
+            },
+            "interrupteurAllume": false,
+            "composants": [
+              {
+                "type": "resistance",
+                "valeur": 7,
+                "typeEnergie": "CHIMIQUE"
+              },
+              {
+                "type": "resistance",
+                "valeur": 4,
+                "typeEnergie": "NUCLEAIRE"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "resistance",
+        "valeur": 1,
+        "typeEnergie": "THERMIQUE"
+      }
+    ]
+  }
+}
