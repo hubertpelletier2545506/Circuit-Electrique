@@ -10,8 +10,8 @@ public class Resistance extends Composant {
 
     public Resistance(Voltage voltage ,double resistance, TypeEnergie typeEnergie){
         setVoltage(voltage);
-        this.resistance = resistance;
-        this.typeEnergie = typeEnergie;
+        setResistance(resistance);
+        setTypeEnergie(typeEnergie);
     }
 
     @Override
@@ -19,7 +19,15 @@ public class Resistance extends Composant {
         return this.resistance;
     }
 
-    protected void setVoltage(Voltage voltage){
+    private void setVoltage(Voltage voltage){
         this.voltage = voltage;
+    }
+
+    private void setResistance(double resistance){
+        this.resistance = resistance;
+    }
+
+    private void setTypeEnergie(TypeEnergie typeEnergie){
+        this.typeEnergie = typeEnergie;
     }
 }
