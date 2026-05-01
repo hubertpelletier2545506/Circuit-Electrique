@@ -8,10 +8,13 @@ public class Resistance extends Composant {
     private TypeEnergie typeEnergie;
     private Voltage voltage;
 
-    public Resistance(Voltage voltage ,double resistance, TypeEnergie typeEnergie){
+    //CONSTANTES
+    public static final TypeEnergie TYPE_ENERGIE_RESISTANCE = TypeEnergie.THERMIQUE;
+
+    public Resistance(Voltage voltage ,double resistance){
         setVoltage(voltage);
         setResistance(resistance);
-        setTypeEnergie(typeEnergie);
+        setTypeEnergie(TYPE_ENERGIE_RESISTANCE);
     }
 
     @Override
