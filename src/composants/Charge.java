@@ -27,8 +27,7 @@ public class Charge extends Resistance {
     }
 
     public double calculerWattage(){
-        //TODO
-        return 0;
+        return this.voltage.getVoltage() * (this.voltage.getVoltage()/ this.resistance);
     }
 
 }
