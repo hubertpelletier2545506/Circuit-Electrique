@@ -1,5 +1,6 @@
 package composants;
 
+import enums.TypeProtection;
 import enums.Voltage;
 
 import java.util.List;
@@ -19,6 +20,13 @@ public abstract class Circuit extends Composant {
         setInterrupteurAllume(interrupteurAllume);
     }
 
+    public Circuit(List<Composant> composants, Voltage voltage, boolean interrupteurAllume) {
+
+        setComposants(composants);
+        setVoltage(voltage);
+        setInterrupteurAllume(interrupteurAllume);
+    }
+
     public void setComposants(List<Composant> composants) {
 
         this.composants = composants;
@@ -35,7 +43,19 @@ public abstract class Circuit extends Composant {
 
     public void setProtection(Protection protection){
 
-        this.protection = protection;
+        if(calculerAmperage() < protection.getAmperageMax()) {
+
+            this.protection = protection;
+        } else{
+            if(protection.getTypeProtection() == TypeProtection.DISJONCTEUR){
+                System.out.println("Le disjoncteur a sauté!");
+
+            }
+            if(protection.getTypeProtection() == TypeProtection.FUSIBLE){
+                throw new ArithmeticException("Fusible brûlée! L'ampérage maximal de " + protection.getAmperageMax() + "amp a été dépassé.");
+
+            }
+        }
     }
 
     public void setInterrupteurAllume(boolean interrupteurAllume){
@@ -45,11 +65,22 @@ public abstract class Circuit extends Composant {
 
     public double calculerAmperage(){
 
-        return voltage.getVoltage()/calculerResistance();
+        try {
+
+            return voltage.getVoltage() / calculerResistance();
+        } catch (ArithmeticException exception){
+            return 0;
+
+        }
     }
 
     public double calculerWattage(){
 
         return voltage.getVoltage()*calculerAmperage();
+    }
+
+    public double calculerCout(double coutElectricite, double nbHeures){
+
+        return coutElectricite*nbHeures*(calculerWattage()/1000);
     }
 }
