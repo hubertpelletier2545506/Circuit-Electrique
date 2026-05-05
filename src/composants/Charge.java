@@ -42,10 +42,6 @@ public class Charge extends Resistance {
         return chargeID;
     }
 
-    public static int getNumCharge() {
-        return numCharge;
-    }
-
     @Override
     public String toString() {
         return this.chargeID + " | " + getNomCharge() + " | " + getResistance() + " Ω | " + TYPE_ENERGIE_RESISTANCE + " | " + getAutreTypeEnergie() + " | " + getVoltage() + "V";
