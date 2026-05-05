@@ -44,6 +44,6 @@ public class Resistance extends Composant {
 
     @Override
     public String toString() {
-        return getResistance() + " Ω | " + TYPE_ENERGIE_RESISTANCE  +  getVoltage() + "V";
+        return getResistance() + " Ω | " + TYPE_ENERGIE_RESISTANCE  + " " + getVoltage().getValeurVoltage() + "V";
     }
 }
