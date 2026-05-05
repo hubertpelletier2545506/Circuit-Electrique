@@ -33,4 +33,17 @@ public class Resistance extends Composant {
     private void setTypeEnergie(TypeEnergie typeEnergie){
         this.typeEnergie = typeEnergie;
     }
+
+    public Voltage getVoltage() {
+        return voltage;
+    }
+
+    public double getResistance() {
+        return resistance;
+    }
+
+    @Override
+    public String toString() {
+        return getResistance() + " Ω | " + TYPE_ENERGIE_RESISTANCE  +  getVoltage() + "V";
+    }
 }

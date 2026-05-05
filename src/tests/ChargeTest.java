@@ -1,16 +1,12 @@
 package tests;
 
+import composants.Charge;
+import enums.TypeEnergie;
+import enums.Voltage;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ChargeTest {
-
-    @org.junit.jupiter.api.Test
-    void getVoltage() {
-    }
-
-    @org.junit.jupiter.api.Test
-    void getResistance() {
-    }
 
     @org.junit.jupiter.api.Test
     void getAutreTypeEnergie() {
