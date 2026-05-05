@@ -7,7 +7,7 @@ public class Protection {
     private int amperageMax;
     private TypeProtection typeProtection;
 
-    private final static int AMPERAGE_DEFAUT = 0;
+    public final static int AMPERAGE_DEFAUT = 0;
 
     public Protection (int amperageMax, TypeProtection typeProtection){
 
