@@ -45,6 +45,10 @@ public abstract class Circuit extends Composant {
         return composants;
     }
 
+    public Protection getProtection(){
+        return protection;
+    }
+
     public void setProtection(Protection protection){
 
         if(calculerAmperage() > protection.getAmperageMax()) {
