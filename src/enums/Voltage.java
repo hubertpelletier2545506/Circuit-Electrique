@@ -14,7 +14,7 @@ public enum Voltage {
     }
 
     // Getter pour récupérer le code
-    public int getVoltage() {
+    public int getValeurVoltage() {
         return volts;
     }
 }

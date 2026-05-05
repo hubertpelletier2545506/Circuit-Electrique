@@ -32,5 +32,6 @@ class ChargeTest {
 
     @org.junit.jupiter.api.Test
     void testToString() {
+
     }
 }
