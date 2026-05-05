@@ -22,10 +22,6 @@ public class Resistance extends Composant {
         return this.resistance;
     }
 
-    public Voltage getVoltage(){
-        return voltage;
-    }
-
     private void setVoltage(Voltage voltage){
         this.voltage = voltage;
     }

@@ -4,8 +4,6 @@ import enums.TypeEnergie;
 import enums.Voltage;
 
 public class Charge extends Resistance {
-    private Voltage voltage;
-    private double resistance;
     private TypeEnergie autreTypeEnergie;
     private String nomCharge;
     private int chargeID;
@@ -25,18 +23,11 @@ public class Charge extends Resistance {
         this.nomCharge = nomCharge;
     }
 
-    private void setAutreTypeEnergie(TypeEnergie typeEnergie2){
-        this.autreTypeEnergie = typeEnergie2;
+    private void setAutreTypeEnergie(TypeEnergie autreTypeEnergie){
+        this.autreTypeEnergie = autreTypeEnergie;
     }
 
 
-    public Voltage getVoltage() {
-        return voltage;
-    }
-
-    public double getResistance() {
-        return resistance;
-    }
 
     public TypeEnergie getAutreTypeEnergie() {
         return autreTypeEnergie;
@@ -51,12 +42,8 @@ public class Charge extends Resistance {
         return chargeID;
     }
 
-    public static int getNumCharge() {
-        return numCharge;
-    }
-
     @Override
     public String toString() {
-        return this.chargeID + " | " + getNomCharge() + " | " + getResistance() + " Ω | " + TYPE_ENERGIE_RESISTANCE + " | " + getAutreTypeEnergie() + " | " + getVoltage() + "V";
+        return "Numéro de charge: " + this.chargeID + " | " + getNomCharge() + " | " + getResistance() + " Ω | " + TYPE_ENERGIE_RESISTANCE + " | " + getAutreTypeEnergie() + " | " + getVoltage().getValeurVoltage() + "V";
     }
 }
