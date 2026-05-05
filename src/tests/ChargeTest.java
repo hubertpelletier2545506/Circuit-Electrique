@@ -16,22 +16,23 @@ class ChargeTest {
 
     @org.junit.jupiter.api.Test
     void getNomCharge() {
-        Charge charge = new Charge(Voltage.VOLTAGE_STANDARD, 10000,TypeEnergie.MECANIQUE, "Moteur");
-        assertEquals("Moteur", charge.getNomCharge());
+        Charge charge2 = new Charge(Voltage.VOLTAGE_STANDARD, 10000,TypeEnergie.MECANIQUE, "Moteur");
+        assertEquals("Moteur", charge2.getNomCharge());
     }
 
     @org.junit.jupiter.api.Test
     void getChargeID() {
-        Charge charge = new Charge(Voltage.VOLTAGE_STANDARD, 10000,TypeEnergie.MECANIQUE, "Moteur");
-        Charge charge2 = new Charge(Voltage.VOLTAGE_STANDARD, 10000,TypeEnergie.RAYONNANTE, "Lumière");
+        Charge charge3 = new Charge(Voltage.VOLTAGE_STANDARD, 10000,TypeEnergie.MECANIQUE, "Moteur");
+        Charge charge4 = new Charge(Voltage.VOLTAGE_STANDARD, 10000,TypeEnergie.RAYONNANTE, "Lumière");
 
-        assertEquals(1, charge.getChargeID());
-        assertEquals(2, charge2.getChargeID());
+        assertEquals(3, charge3.getChargeID());
+        assertEquals(4, charge4.getChargeID());
 
     }
 
     @org.junit.jupiter.api.Test
     void testToString() {
-
+        Charge charge = new Charge(Voltage.VOLTAGE_STANDARD, 10000,TypeEnergie.MECANIQUE, "Moteur");
+        assertEquals("Numéro de charge: 2 | Moteur | 10000.0 Ω | THERMIQUE | MECANIQUE | 120V", charge.toString());
     }
 }
