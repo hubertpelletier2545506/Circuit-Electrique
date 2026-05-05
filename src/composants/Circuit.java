@@ -27,9 +27,27 @@ public abstract class Circuit extends Composant {
         setInterrupteurAllume(interrupteurAllume);
     }
 
+    private boolean verifierVoltageComposants(){
+
+        for (Composant composant : composants){
+
+            if(composant.getVoltage() != voltage){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public void setComposants(List<Composant> composants) {
 
-        this.composants = composants;
+
+        if(verifierVoltageComposants()){
+            this.composants = composants;
+        } else{
+            throw new ArithmeticException("Le voltage d'un des composants est incompatible avec le voltage du circuit");
+        }
+
     }
 
     public void setVoltage(Voltage voltage){
@@ -43,7 +61,7 @@ public abstract class Circuit extends Composant {
 
     public void setProtection(Protection protection){
 
-        if(calculerAmperage() > protection.getAmperageMax()) {
+        if(calculerAmperage() < protection.getAmperageMax()) {
 
             this.protection = protection;
         } else{
@@ -66,10 +84,14 @@ public abstract class Circuit extends Composant {
     public double calculerAmperage(){
 
         try {
+            if(interrupteurAllume == false){
+                return 0;
+            } else {
 
-            return voltage.getVoltage() / calculerResistance();
+                return voltage.getVoltage() / calculerResistance();
+            }
         } catch (ArithmeticException exception){
-            return 0;
+            return Double.POSITIVE_INFINITY;
 
         }
     }
