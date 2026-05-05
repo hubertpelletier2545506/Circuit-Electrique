@@ -45,5 +45,11 @@ public class CircuitAPP {
         System.out.println("===============================================");
     }
 
+    private static void afficherDebutProgramme(){
+        System.out.println("===============================================");
+        System.out.println("Début du programme");
+        System.out.println("===============================================");
+    }
+
 
 }
