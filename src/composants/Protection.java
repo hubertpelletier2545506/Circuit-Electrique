@@ -32,7 +32,7 @@ public class Protection {
     }
 
     public void setTypeProtection (TypeProtection typeProtection){
-        this.typeProtection = typeProtection
+        this.typeProtection = typeProtection;
     }
 
     public TypeProtection getTypeProtection(){

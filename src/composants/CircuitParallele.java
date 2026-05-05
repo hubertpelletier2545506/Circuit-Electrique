@@ -6,7 +6,7 @@ import java.util.List;
 
 public class CircuitParallele extends Circuit{
 
-    CircuitParallele(List<Composant> composants, Voltage voltage, Protection protection, boolean interrupteurAllume){
+    public CircuitParallele(List<Composant> composants, Voltage voltage, Protection protection, boolean interrupteurAllume){
         super(composants, voltage, protection,  interrupteurAllume);
     }
 
