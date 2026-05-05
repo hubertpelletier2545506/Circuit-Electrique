@@ -67,7 +67,7 @@ public abstract class Circuit extends Composant {
 
         try {
 
-            return voltage.getVoltage() / calculerResistance();
+            return voltage.getValeurVoltage() / calculerResistance();
         } catch (ArithmeticException exception){
             return 0;
 
@@ -76,7 +76,7 @@ public abstract class Circuit extends Composant {
 
     public double calculerWattage(){
 
-        return voltage.getVoltage()*calculerAmperage();
+        return voltage.getValeurVoltage()*calculerAmperage();
     }
 
     public double calculerCout(double coutElectricite, double nbHeures){
