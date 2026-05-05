@@ -38,4 +38,12 @@ public class CircuitAPP {
             System.out.println("Choix incorrect. Veuillez entrer un chiffre entre 1 et " + fichiers.length + ".");
         }
     }
+    private static void afficherResultat(String nomFichier, double resultat){
+        System.out.println("===============================================");
+        System.out.println(" Résultat pour : " + nomFichier);
+        System.out.println(" Résistance équivalente : " + String.format("%.2f",resultat) + "Ω");
+        System.out.println("===============================================");
+    }
+
+
 }
