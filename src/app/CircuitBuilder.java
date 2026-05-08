@@ -24,7 +24,11 @@ public class CircuitBuilder {
             JsonNode donneesCircuits = mapper.readTree(new File(pathIn + fSep + nomFichier));
             return lireComposant(donneesCircuits.get("circuit"));
         } catch (IOException e) {
-            System.err.println("Erreur de lecture : " + e.getMessage());
+            System.out.println("Erreur de lecture du fichier : " + e.getMessage());
+            return null;
+        } catch (ArithmeticException | IllegalArgumentException e) {
+            System.out.println("Erreur lors de la construction du circuit : " + e.getMessage());
+            System.out.println("Veuillez vérifier l'intégrité du fichier JSON.");
             return null;
         }
     }
