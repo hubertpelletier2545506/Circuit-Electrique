@@ -3,6 +3,7 @@ package app;
 import composants.Circuit;
 import composants.Composant;
 import enums.TypeEnergie;
+import enums.TypeProtection;
 import enums.Voltage;
 
 import java.io.File;
@@ -55,12 +56,12 @@ public class CircuitAPP {
         System.out.println("===============================================");
         System.out.println("Début du programme");
         System.out.println("===============================================");
-        System.out.println("Veuillez choisir parmi les deux options suivantes: \n[1] Tester un fichier existant\n[2] Créer un nouveau circuit");
+        System.out.println("Veuillez choisir parmi les deux options suivantes: \n[1] Tester un fichier existant\n[2] Créer un nouveau circuit en série\n[3] Quitter");
     }
 
-    private static boolean demanderSiContinuer(){
+    private static boolean demanderTesterOuRetourner(){
         while(true){
-            System.out.println("\n[1] Tester un autre fichier | [2] Quitter : ");
+            System.out.println("\n[1] Tester un autre fichier | [2] Retourner au menu principal ");
             int continuer = scanner.nextInt();
 
             if(continuer == 1){
@@ -73,6 +74,33 @@ public class CircuitAPP {
         }
     }
 
+    private static boolean validerIntervalle(int nombreOptions, int numeroSelectionne){
+
+        if(numeroSelectionne > 0 && numeroSelectionne <= nombreOptions){
+            return true;
+        }
+
+        return false;
+    }
+
+    private static void afficherVoltage(){
+
+        int i = 1;
+
+        for (Voltage voltage : Voltage.values()){
+
+            System.out.println("[" + i + "] " + voltage);
+            i++;
+        }
+
+    }
+
+    private static Voltage retournerVoltage(int numeroSelectionne){
+
+        return Voltage.values()[numeroSelectionne -1];
+
+    }
+
     private static void afficherTypesEnergie (){
 
         int i = 1;
@@ -82,24 +110,44 @@ public class CircuitAPP {
             System.out.println("[" + i + "] " + typeEnergie);
             i++;
         }
-    }  private static void retournerTypeEnergie (int numeroSelectionne){
+    }  private static TypeEnergie retournerTypeEnergie (int numeroSelectionne){
 
+        return TypeEnergie.values()[numeroSelectionne -1];
+
+    }
+
+    private static void afficherProtections(){
+
+        int i = 1;
+
+        for (TypeProtection typeProtection : TypeProtection.values()){
+
+            System.out.println("[" + i + "] " + typeProtection);
+            i++;
+        }
+
+    }
+
+    private static TypeProtection retournerProtection (int numeroSelectionne){
+
+        return TypeProtection.values()[numeroSelectionne -1];
 
     }
 
     public static void main(String[] args) {
 
         CircuitBuilder builder = new CircuitBuilder();
-        boolean continuer = true;
+        boolean testerOuCreer = true;
+        boolean testerOuRetourner = true;
 
-        while(true) {
+        while(testerOuCreer) {
             afficherDebutProgramme();
 
             int option = scanner.nextInt();
 
             if (option == 1) {
 
-                while (continuer) {
+                while (testerOuRetourner) {
                     File fichier = selectionnerFichier();
 
                     if (fichier != null) {
@@ -113,14 +161,37 @@ public class CircuitAPP {
                             afficherResultat(fichier.getName(), resistance, amperage, wattage, voltage);
                         }
                     }
-                    continuer = demanderSiContinuer();
+                    testerOuRetourner = demanderTesterOuRetourner();
                 }
-                System.out.println("Programme arrêté");
+                testerOuCreer = true;
 
             } else if (option == 2) {
 
+                int numeroSelectionne = 1;
+                boolean validerNumeroSelectionne = true;
+
+                System.out.println("--- CRÉATION D'UN NOUVEAU CIRCUIT EN SÉRIE ---");
+
+                while(validerNumeroSelectionne) {
+
+                    System.out.println("Veuillez choisir la différence de potentiel du circuit: ");
+                    afficherVoltage();
+                    numeroSelectionne = scanner.nextInt();
+                    validerNumeroSelectionne = validerIntervalle(3, numeroSelectionne);
+                    retournerVoltage(numeroSelectionne);
+                }
+
+            }
+
+            else if (option == 3){
+                System.out.println("===============================================");
+                System.out.println("Fin du programme");
+                System.out.println("===============================================");
+                testerOuCreer = false;
+
             } else {
-                System.out.println("Option non reconnue. Utilisez 1 ou 2.");
+                System.out.println("Option non reconnue. Utilisez 1, 2 ou 3.");
+                testerOuCreer = true;
             }
 
         }
