@@ -126,4 +126,16 @@ class CircuitTest {
     @org.junit.jupiter.api.Test
     void calculerCout() {
     }
+    @Test
+    void constructeurSansProtection(){
+        Charge charge = new Charge(Voltage.VOLTAGE_STANDARD, 10000,TypeEnergie.MECANIQUE, "Moteur");
+        List<Composant> composants = new ArrayList<>();
+        composants.add(charge);
+        CircuitSerie circuitSerie=new CircuitSerie(composants,Voltage.VOLTAGE_STANDARD,true);
+
+        Protection actual=circuitSerie.getProtection();
+        Protection expected= null;
+
+        assertEquals(expected,actual);
+    }
 }
