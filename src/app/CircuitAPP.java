@@ -2,6 +2,7 @@ package app;
 
 import composants.Circuit;
 import composants.Composant;
+import composants.Protection;
 import enums.TypeEnergie;
 import enums.TypeProtection;
 import enums.Voltage;
@@ -54,7 +55,7 @@ public class CircuitAPP {
 
     private static void afficherDebutProgramme(){
         System.out.println("===============================================");
-        System.out.println("Début du programme");
+        System.out.println("Menu principal");
         System.out.println("===============================================");
         System.out.println("Veuillez choisir parmi les deux options suivantes: \n[1] Tester un fichier existant\n[2] Créer un nouveau circuit en série\n[3] Quitter");
     }
@@ -80,7 +81,10 @@ public class CircuitAPP {
             return true;
         }
 
+        System.out.println("Option non reconnue. Veuillez entrer un nombre entre 1 et " + nombreOptions);
+
         return false;
+
     }
 
     private static void afficherVoltage(){
@@ -139,6 +143,7 @@ public class CircuitAPP {
         CircuitBuilder builder = new CircuitBuilder();
         boolean testerOuCreer = true;
         boolean testerOuRetourner = true;
+        boolean choisirProtection = true;
 
         while(testerOuCreer) {
             afficherDebutProgramme();
@@ -167,18 +172,59 @@ public class CircuitAPP {
 
             } else if (option == 2) {
 
-                int numeroSelectionne = 1;
-                boolean validerNumeroSelectionne = true;
+                int numeroSelectionne = 0;
+                boolean validerNumeroSelectionne = false;
 
                 System.out.println("--- CRÉATION D'UN NOUVEAU CIRCUIT EN SÉRIE ---");
+                System.out.println("Veuillez choisir la différence de potentiel du circuit: ");
 
-                while(validerNumeroSelectionne) {
+                while(!validerNumeroSelectionne) {
 
-                    System.out.println("Veuillez choisir la différence de potentiel du circuit: ");
                     afficherVoltage();
                     numeroSelectionne = scanner.nextInt();
                     validerNumeroSelectionne = validerIntervalle(3, numeroSelectionne);
-                    retournerVoltage(numeroSelectionne);
+                }
+
+                Voltage voltage = retournerVoltage(numeroSelectionne);
+
+                validerNumeroSelectionne = false;
+
+                System.out.println("Voulez-vous ajouter une protection au circuit?");
+
+                while(choisirProtection) {
+
+                    System.out.println("[1] Oui\n[2] Non");
+                    int choixProtection = scanner.nextInt();
+
+                    if (choixProtection == 1) {
+
+                        System.out.println("Veuillez choisir le type de protection");
+
+                        while (!validerNumeroSelectionne) {
+                            afficherProtections();
+                            numeroSelectionne = scanner.nextInt();
+                            validerNumeroSelectionne = validerIntervalle(2, numeroSelectionne);
+
+                        }
+
+                        TypeProtection typeProtection = retournerProtection(numeroSelectionne);
+
+                        System.out.println("Veuillez choisir l'ampérage maximal de la protection");
+                        int amperageMax = scanner.nextInt();
+
+                        Protection protection = new Protection(amperageMax,typeProtection);
+
+                        choisirProtection = false;
+
+                    } else if (choixProtection == 2) {
+
+
+                        choisirProtection = false;
+
+                    } else {
+                        System.out.println("Option non reconnue. Utilisez 1 ou 2.");
+
+                    }
                 }
 
             }
