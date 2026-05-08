@@ -2,96 +2,53 @@
   "circuit": {
     "type": "serie",
     "voltage": "VOLTAGE_BAS",
-    "protection": {
-      "type": "FUSIBLE",
-      "valeur": 8
-    },
+    "protection": { "type": "FUSIBLE", "valeur": 8 },
     "interrupteurAllume": true,
     "composants": [
       {
-        "type": "resistance",
+        "type": "charge",
+        "nom": "Module de recharge",
         "valeur": 2,
+        "voltage": "VOLTAGE_BAS",
         "typeEnergie": "CHIMIQUE"
       },
       {
         "type": "parallele",
         "voltage": "VOLTAGE_BAS",
-        "protection": {
-          "type": "DISJONCTEUR",
-          "valeur": 6
-        },
+        "protection": { "type": "DISJONCTEUR", "valeur": 6 },
         "interrupteurAllume": true,
         "composants": [
           {
             "type": "serie",
             "voltage": "VOLTAGE_BAS",
-            "protection": {
-              "type": "FUSIBLE",
-              "valeur": 4
-            },
-            "interrupteurAllume": true,
             "composants": [
               {
-                "type": "resistance",
+                "type": "charge",
+                "nom": "Haut-parleur",
                 "valeur": 3,
+                "voltage": "VOLTAGE_BAS",
                 "typeEnergie": "SONORE"
               },
               {
                 "type": "parallele",
                 "voltage": "VOLTAGE_BAS",
-                "protection": {
-                  "type": "DISJONCTEUR",
-                  "valeur": 3
-                },
-                "interrupteurAllume": true,
                 "composants": [
-                  {
-                    "type": "resistance",
-                    "valeur": 6,
-                    "typeEnergie": "THERMIQUE"
-                  },
-                  {
-                    "type": "resistance",
-                    "valeur": 9,
-                    "typeEnergie": "MECANIQUE"
-                  }
+                  { "type": "resistance", "valeur": 6, "voltage": "VOLTAGE_BAS" },
+                  { "type": "resistance", "valeur": 9, "voltage": "VOLTAGE_BAS" }
                 ]
               }
             ]
           },
           {
-            "type": "resistance",
+            "type": "charge",
+            "nom": "Écran LED",
             "valeur": 15,
-            "typeEnergie": "RAYONNANTE"
-          },
-          {
-            "type": "serie",
             "voltage": "VOLTAGE_BAS",
-            "protection": {
-              "type": "FUSIBLE",
-              "valeur": 2
-            },
-            "interrupteurAllume": false,
-            "composants": [
-              {
-                "type": "resistance",
-                "valeur": 7,
-                "typeEnergie": "CHIMIQUE"
-              },
-              {
-                "type": "resistance",
-                "valeur": 4,
-                "typeEnergie": "NUCLEAIRE"
-              }
-            ]
+            "typeEnergie": "RAYONNANTE"
           }
         ]
       },
-      {
-        "type": "resistance",
-        "valeur": 1,
-        "typeEnergie": "THERMIQUE"
-      }
+      { "type": "resistance", "valeur": 1, "voltage": "VOLTAGE_BAS" }
     ]
   }
 }
