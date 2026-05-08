@@ -13,9 +13,8 @@ public abstract class Circuit extends Composant {
     protected boolean interrupteurAllume;
 
     public Circuit(List<Composant> composants, Voltage voltage, Protection protection, boolean interrupteurAllume) {
-
-        setComposants(composants);
         setVoltage(voltage);
+        setComposants(composants);
         setProtection(protection);
         setInterrupteurAllume(interrupteurAllume);
     }
@@ -40,8 +39,7 @@ public abstract class Circuit extends Composant {
     }
 
     public void setComposants(List<Composant> composants) {
-
-
+        this.composants = composants;
         if(verifierVoltageComposants()){
             this.composants = composants;
         } else{
@@ -58,6 +56,10 @@ public abstract class Circuit extends Composant {
     public Voltage getVoltage(){
         return voltage;
     }
+
+    public Protection getProtection(){return protection;}
+
+    public List<Composant> getComposants(){return composants;}
 
     public void setProtection(Protection protection){
 
@@ -88,7 +90,7 @@ public abstract class Circuit extends Composant {
                 return 0;
             } else {
 
-                return voltage.getVoltage() / calculerResistance();
+                return voltage.getValeurVoltage() / calculerResistance();
             }
         } catch (ArithmeticException exception){
             return Double.POSITIVE_INFINITY;
@@ -98,7 +100,7 @@ public abstract class Circuit extends Composant {
 
     public double calculerWattage(){
 
-        return voltage.getVoltage()*calculerAmperage();
+        return voltage.getValeurVoltage()*calculerAmperage();
     }
 
     public double calculerCout(double coutElectricite, double nbHeures){

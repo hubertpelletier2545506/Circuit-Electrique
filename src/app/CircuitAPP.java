@@ -44,7 +44,7 @@ public class CircuitAPP {
     private static void afficherResultat(String nomFichier, double resistance, double amperage, double wattage, Voltage voltage){
         System.out.println("===============================================");
         System.out.println(" Résultat pour : " + nomFichier);
-        System.out.println(" Différence de potentiel: " + voltage.getVoltage() + "V");
+        System.out.println(" Différence de potentiel: " + voltage.getValeurVoltage() + "V");
         System.out.println(" Résistance équivalente: " + String.format("%.2f",resistance) + "Ω");
         System.out.println(" Ampérage du circuit: " + String.format("%.2f", amperage) + "A");
         System.out.println(" Puissance du circuit: " + String.format("%.2f", wattage) + "W");
