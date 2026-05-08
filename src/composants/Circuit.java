@@ -2,6 +2,7 @@ package composants;
 
 import enums.TypeProtection;
 import enums.Voltage;
+import exception.CircuitSauteException;
 
 import java.util.List;
 
@@ -20,9 +21,8 @@ public abstract class Circuit extends Composant {
     }
 
     public Circuit(List<Composant> composants, Voltage voltage, boolean interrupteurAllume) {
-
-        setComposants(composants);
         setVoltage(voltage);
+        setComposants(composants);
         setInterrupteurAllume(interrupteurAllume);
     }
 
@@ -71,11 +71,11 @@ public abstract class Circuit extends Composant {
             this.protection = protection;
         } else{
             if(protection.getTypeProtection() == TypeProtection.DISJONCTEUR){
-                System.out.println("Le disjoncteur a sauté!");
+                throw new CircuitSauteException("Disjoncteur brûlée! L'ampérage maximal de " + protection.getAmperageMax() + "amp a été dépassé.");
 
             }
             if(protection.getTypeProtection() == TypeProtection.FUSIBLE){
-                throw new ArithmeticException("Fusible brûlée! L'ampérage maximal de " + protection.getAmperageMax() + "amp a été dépassé.");
+                throw new CircuitSauteException("Fusible brûlée! L'ampérage maximal de " + protection.getAmperageMax() + "amp a été dépassé.");
 
             }
         }
@@ -96,7 +96,9 @@ public abstract class Circuit extends Composant {
                 return voltage.getValeurVoltage() / calculerResistance();
             }
         } catch (ArithmeticException exception){
-            return Double.POSITIVE_INFINITY;
+            throw new CircuitSauteException("Le circuit a sauté, il n'y a aucune résistance!");
+
+
 
         }
     }

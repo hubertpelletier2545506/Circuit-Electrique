@@ -142,4 +142,16 @@ class CircuitTest {
 
         assertEquals(1.18, serie.calculerCout(0.819,1000));
     }
+    @Test
+    void constructeurSansProtection(){
+        Charge charge = new Charge(Voltage.VOLTAGE_STANDARD, 10000,TypeEnergie.MECANIQUE, "Moteur");
+        List<Composant> composants = new ArrayList<>();
+        composants.add(charge);
+        CircuitSerie circuitSerie=new CircuitSerie(composants,Voltage.VOLTAGE_STANDARD,true);
+
+        Protection actual=circuitSerie.getProtection();
+        Protection expected= null;
+
+        assertEquals(expected,actual);
+    }
 }

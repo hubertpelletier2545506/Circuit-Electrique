@@ -9,6 +9,9 @@ public class CircuitSerie extends Circuit {
     public CircuitSerie(List<Composant> composants, Voltage voltage, Protection protection,boolean interrupteurAllume) {
         super(composants, voltage, protection,interrupteurAllume);
     }
+    public CircuitSerie(List<Composant> composants, Voltage voltage,boolean interrupteurAllume) {
+        super(composants, voltage,interrupteurAllume);
+    }
 
     @Override
     public double calculerResistance() {
