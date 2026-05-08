@@ -2,6 +2,7 @@ package composants;
 
 import enums.TypeProtection;
 import enums.Voltage;
+import exception.CircuitSaute;
 
 import java.util.List;
 
@@ -20,9 +21,8 @@ public abstract class Circuit extends Composant {
     }
 
     public Circuit(List<Composant> composants, Voltage voltage, boolean interrupteurAllume) {
-
-        setComposants(composants);
         setVoltage(voltage);
+        setComposants(composants);
         setInterrupteurAllume(interrupteurAllume);
     }
 
@@ -96,7 +96,9 @@ public abstract class Circuit extends Composant {
                 return voltage.getValeurVoltage() / calculerResistance();
             }
         } catch (ArithmeticException exception){
-            return Double.POSITIVE_INFINITY;
+            throw new CircuitSaute("Le circuit a sauté, il n'y a aucune résistance!");
+
+
 
         }
     }
