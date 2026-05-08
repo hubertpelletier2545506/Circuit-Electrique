@@ -107,7 +107,7 @@ public abstract class Circuit extends Composant {
     }
 
     public double calculerCout(double coutElectricite, double nbHeures){
-
-        return coutElectricite*nbHeures*(calculerWattage()/1000);
+        double cout = coutElectricite*nbHeures*(calculerWattage()/1000);
+        return Math.round(cout * 100.0) / 100.0;
     }
 }
