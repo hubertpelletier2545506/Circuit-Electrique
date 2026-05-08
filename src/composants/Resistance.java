@@ -22,6 +22,14 @@ public class Resistance extends Composant {
         return this.resistance;
     }
 
+    @Override
+    public Voltage getVoltage() {
+        return voltage;
+    }
+    public double getResistance(){
+        return resistance;
+    }
+
     private void setVoltage(Voltage voltage){
         this.voltage = voltage;
     }
