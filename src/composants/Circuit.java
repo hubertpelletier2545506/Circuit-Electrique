@@ -61,6 +61,9 @@ public abstract class Circuit extends Composant {
 
     public List<Composant> getComposants(){return composants;}
 
+    public boolean getinterrupteurAllume(){return interrupteurAllume;
+    }
+
     public void setProtection(Protection protection){
 
         if(calculerAmperage() < protection.getAmperageMax()) {

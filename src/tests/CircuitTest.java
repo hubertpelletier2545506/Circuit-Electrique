@@ -94,6 +94,17 @@ class CircuitTest {
 
     @org.junit.jupiter.api.Test
     void setInterrupteurAllume() {
+        Charge charge = new Charge(Voltage.VOLTAGE_STANDARD, 10000,TypeEnergie.MECANIQUE, "Moteur");
+        List<Composant> composants = new ArrayList<>();
+        composants.add(charge);
+        Protection disjoncteurInitiale = new Protection(100, TypeProtection.DISJONCTEUR);
+        Voltage  voltageInitiale = Voltage.VOLTAGE_STANDARD;
+        CircuitSerie serie = new CircuitSerie(composants, voltageInitiale, disjoncteurInitiale, false );
+
+        assertFalse(serie.getinterrupteurAllume());
+        serie.setInterrupteurAllume(true);
+        assertTrue(serie.getinterrupteurAllume());
+
     }
 
     @org.junit.jupiter.api.Test
