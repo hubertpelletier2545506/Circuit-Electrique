@@ -2,94 +2,54 @@
   "circuit": {
     "type": "parallele",
     "voltage": "VOLTAGE_ELEVE",
-    "protection": {
-      "type": "DISJONCTEUR",
-      "valeur": 50
-    },
+    "protection": { "type": "DISJONCTEUR", "valeur": 50 },
     "interrupteurAllume": true,
     "composants": [
       {
         "type": "serie",
         "voltage": "VOLTAGE_ELEVE",
-        "protection": {
-          "type": "DISJONCTEUR",
-          "valeur": 30
-        },
+        "protection": { "type": "DISJONCTEUR", "valeur": 30 },
         "interrupteurAllume": true,
         "composants": [
           {
-            "type": "resistance",
+            "type": "charge",
+            "nom": "Presse hydraulique",
             "valeur": 15,
+            "voltage": "VOLTAGE_ELEVE",
             "typeEnergie": "MECANIQUE"
           },
           {
             "type": "parallele",
             "voltage": "VOLTAGE_STANDARD",
-            "protection": {
-              "type": "FUSIBLE",
-              "valeur": 20
-            },
+            "protection": { "type": "FUSIBLE", "valeur": 20 },
             "interrupteurAllume": true,
             "composants": [
+              { "type": "resistance", "valeur": 10, "voltage": "VOLTAGE_STANDARD" },
               {
-                "type": "resistance",
-                "valeur": 10,
-                "typeEnergie": "THERMIQUE"
-              },
-              {
-                "type": "resistance",
+                "type": "charge",
+                "nom": "Bain de traitement",
                 "valeur": 20,
+                "voltage": "VOLTAGE_STANDARD",
                 "typeEnergie": "CHIMIQUE"
               },
               {
                 "type": "serie",
                 "voltage": "VOLTAGE_STANDARD",
-                "protection": {
-                  "type": "DISJONCTEUR",
-                  "valeur": 10
-                },
                 "interrupteurAllume": false,
                 "composants": [
                   {
-                    "type": "resistance",
+                    "type": "charge",
+                    "nom": "Sonde isotopique",
                     "valeur": 5,
+                    "voltage": "VOLTAGE_STANDARD",
                     "typeEnergie": "NUCLEAIRE"
                   },
-                  {
-                    "type": "resistance",
-                    "valeur": 8,
-                    "typeEnergie": "MECANIQUE"
-                  }
+                  { "type": "resistance", "valeur": 8, "voltage": "VOLTAGE_STANDARD" }
                 ]
               }
             ]
           },
-          {
-            "type": "resistance",
-            "valeur": 12,
-            "typeEnergie": "RAYONNANTE"
-          }
-        ]
-      },
-      {
-        "type": "serie",
-        "voltage": "VOLTAGE_BAS",
-        "protection": {
-          "type": "FUSIBLE",
-          "valeur": 10
-        },
-        "interrupteurAllume": false,
-        "composants": [
-          {
-            "type": "resistance",
-            "valeur": 4,
-            "typeEnergie": "SONORE"
-          },
-          {
-            "type": "resistance",
-            "valeur": 6,
-            "typeEnergie": "THERMIQUE"
-          }
+          { "type": "resistance", "valeur": 12, "voltage": "VOLTAGE_ELEVE" }
         ]
       }
     ]

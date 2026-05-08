@@ -2,80 +2,52 @@
   "circuit": {
     "type": "serie",
     "voltage": "VOLTAGE_STANDARD",
-    "protection": {
-      "type": "DISJONCTEUR",
-      "valeur": 20
-    },
+    "protection": { "type": "DISJONCTEUR", "valeur": 20 },
     "interrupteurAllume": true,
     "composants": [
       {
-        "type": "resistance",
+        "type": "charge",
+        "nom": "Convecteur mural",
         "valeur": 5,
+        "voltage": "VOLTAGE_STANDARD",
         "typeEnergie": "THERMIQUE"
       },
       {
         "type": "parallele",
         "voltage": "VOLTAGE_STANDARD",
-        "protection": {
-          "type": "FUSIBLE",
-          "valeur": 15
-        },
+        "protection": { "type": "FUSIBLE", "valeur": 15 },
         "interrupteurAllume": true,
         "composants": [
           {
             "type": "serie",
             "voltage": "VOLTAGE_STANDARD",
-            "protection": {
-              "type": "DISJONCTEUR",
-              "valeur": 10
-            },
+            "protection": { "type": "DISJONCTEUR", "valeur": 10 },
             "interrupteurAllume": true,
             "composants": [
-              {
-                "type": "resistance",
-                "valeur": 8,
-                "typeEnergie": "THERMIQUE"
-              },
-              {
-                "type": "resistance",
-                "valeur": 12,
-                "typeEnergie": "MECANIQUE"
-              }
+              { "type": "resistance", "valeur": 8, "voltage": "VOLTAGE_STANDARD" },
+              { "type": "resistance", "valeur": 12, "voltage": "VOLTAGE_STANDARD" }
             ]
           },
           {
             "type": "serie",
             "voltage": "VOLTAGE_STANDARD",
-            "protection": {
-              "type": "FUSIBLE",
-              "valeur": 5
-            },
+            "protection": { "type": "FUSIBLE", "valeur": 5 },
             "interrupteurAllume": false,
             "composants": [
-              {
-                "type": "resistance",
-                "valeur": 30,
-                "typeEnergie": "RAYONNANTE"
-              },
-              {
-                "type": "resistance",
-                "valeur": 10,
-                "typeEnergie": "THERMIQUE"
-              }
+              { "type": "resistance", "valeur": 30, "voltage": "VOLTAGE_STANDARD" },
+              { "type": "resistance", "valeur": 10, "voltage": "VOLTAGE_STANDARD" }
             ]
           },
           {
-            "type": "resistance",
+            "type": "charge",
+            "nom": "Système d'alarme",
             "valeur": 25,
+            "voltage": "VOLTAGE_STANDARD",
             "typeEnergie": "SONORE"
           }
         ]
       },
-      {
-        "type": "resistance",
-        "valeur": 3,
-        "typeEnergie": "MECANIQUE"
-      }
+      { "type": "resistance", "valeur": 3, "voltage": "VOLTAGE_STANDARD" }
     ]
   }
 }
