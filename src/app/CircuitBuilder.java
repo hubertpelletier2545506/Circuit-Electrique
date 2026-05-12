@@ -7,8 +7,7 @@ import enums.TypeEnergie;
 import enums.TypeProtection;
 import enums.Voltage;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,5 +85,23 @@ public class CircuitBuilder {
         }
 
         throw new IllegalArgumentException("Type de composant inconnu:" + type);
+    }
+
+    // récursivité ?
+    public void ecritureComposantCSV(Composant composant, PrintWriter writer) {
+        String type = composant.getClass().getSimpleName();
+        double resistance = composant.calculerResistance();
+        String voltage = composant.getVoltage().toString();
+
+        writer.println(type + ";" + resistance + ";" + voltage);
+    }
+    public void exporterCSV(Composant composant, String nomFichier) {
+        try (PrintWriter writer = new PrintWriter(new File(pathIn + fSep + nomFichier))){
+            writer.println("Type;Resistanc;Voltage");
+            ecritureComposantCSV(composant, writer);
+            System.out.println("Exportation CSV réussi : " + nomFichier);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }
