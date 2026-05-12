@@ -55,7 +55,7 @@ public class Protection {
             this.amperageMax = amperageMax;
         } else {
 
-            System.out.println("Une protection ne peut pas avoir un ampérage maximal néagtif. Nouvelle valeur de l'ampérage maximal: 0");
+            System.out.println("Une protection ne peut pas avoir un ampérage maximal néagtif. Nouvelle valeur de l'ampérage maximal: " + AMPERAGE_DEFAUT + "A");
             setAmperageMax(AMPERAGE_DEFAUT);
         }
     }
@@ -72,7 +72,8 @@ public class Protection {
     /**
      * Définit le type de protection.
      * <p>
-     * Si le type de protection est null, on assigne le type de protection par défaut
+     * Si le type de protection est null, le type de protection est automatiquement
+     * remplacé par le type par défaut TypeProtection.DISJONCTEUR
      * <p>
      *
      * @param typeProtection le type de protection à définir

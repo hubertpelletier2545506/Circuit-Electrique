@@ -209,12 +209,8 @@ public class CircuitAPP {
                     if (fichier != null) {
                         Composant circuit = builder.construireCircuit(fichier.getName());
                         if (circuit != null) {
-                            double resistance = circuit.calculerResistance();
-                            double amperage = ((Circuit) circuit).calculerAmperage();
-                            double wattage = ((Circuit) circuit).calculerWattage();
-                            Voltage voltage = circuit.getVoltage(); //à optimiser, méthode qui retourne un tableau?
                             System.out.println("\nRésultat pour : " + fichier.getName() + "\n");
-                            afficherResultat(resistance, amperage, wattage, voltage);
+                            afficherResultat(circuit.calculerResistance(), ((Circuit) circuit).calculerAmperage(), ((Circuit) circuit).calculerWattage(), circuit.getVoltage());
                         }
                     }
 
