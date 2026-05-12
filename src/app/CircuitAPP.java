@@ -49,10 +49,10 @@ public class CircuitAPP {
 
     private static void afficherResultat(double resistance, double amperage, double wattage, Voltage voltage) {
         System.out.println("===============================================");
-        System.out.println(" Différence de potentiel: " + voltage.getValeurVoltage() + "V");
-        System.out.println(" Résistance équivalente: " + String.format("%.2f", resistance) + "Ω");
-        System.out.println(" Ampérage du circuit: " + String.format("%.2f", amperage) + "A");
-        System.out.println(" Puissance du circuit: " + String.format("%.2f", wattage) + "W");
+        System.out.println(" Différence de potentiel: " + voltage.getValeurVoltage() + " V");
+        System.out.println(" Résistance équivalente: " + String.format("%.2f", resistance) + " Ω");
+        System.out.println(" Ampérage du circuit: " + String.format("%.2f", amperage) + " A");
+        System.out.println(" Puissance du circuit: " + String.format("%.2f", wattage) + " W");
         System.out.println("===============================================");
     }
 
@@ -197,7 +197,7 @@ public class CircuitAPP {
         Protection protection = new Protection(0, null);
         while (!recommencer) {
 
-            int option = lireIntervalle(afficherDebutProgramme(), 3);
+            int option = lireIntervalle(afficherDebutProgramme(), 4);
 
             if (option == 1) {
 
@@ -316,7 +316,12 @@ public class CircuitAPP {
                     File fichier = selectionnerFichier();
                     if (fichier != null) {
                         Composant circuit = builder.construireCircuit(fichier.getName());
-                        builder.exporterCSV(circuit, "resultat.csv");
+                        if (circuit==null){
+                            System.out.println("L'exportation ne peut pas s'effectuer, car le circuit n'est pas valide");
+                        }else{
+                            builder.exporterCSV(circuit, "resultat.csv");
+                        }
+
                     }
                     numeroSelectionne = lireIntervalle("\n[1] Exporter un autre fichier | [2] Retourner au menu principal", 2);
                     if (numeroSelectionne == 2) {
