@@ -4,6 +4,8 @@ import composants.Resistance;
 import enums.Voltage;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Type;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -48,13 +50,23 @@ class ResistanceTest {
     }
 
     /**
+     * Vérifie que la méthode getResistance retourne
+     * la valeur de resistance de base, car la valeur entré n'est pas valide
+     */
+    @Test
+    void getResistanceNegative(){
+        Resistance resistance3 = new Resistance(Voltage.VOLTAGE_BAS, -5);
+        assertEquals(0, resistance3.getResistance());
+    }
+
+    /**
      * Vérifie que la méthode toString retourne
      * la chaîne de caractères attendue.
      */
     @Test
     void testToString() {
         Resistance resistance4 = new Resistance(Voltage.VOLTAGE_STANDARD, 10);
-        assertEquals("10.0 Ω | THERMIQUE 120V", resistance4.toString());
+        assertEquals("Numéro de charge: 2 | Résistance: 10.0 Ω | Type d'énergie: THERMIQUE | Différence de potentiel 120V\n", resistance4.toString());
     }
     //todo methode test to string
 }
