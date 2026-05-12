@@ -58,7 +58,7 @@ public class CircuitAPP {
 
     private static String afficherDebutProgramme() {
 
-        return "===============================================\nMenu principal\n===============================================\nVeuillez choisir parmi les deux options suivantes: \n[1] Tester un fichier existant\n[2] Créer un nouveau circuit en série\n[3] Quitter";
+        return "===============================================\nMenu principal\n===============================================\nVeuillez choisir parmi les deux options suivantes: \n[1] Tester un fichier existant\n[2] Créer un nouveau circuit en série\n[3] Exporter un fichier existant\n[4] Quitter";
     }
 
     public static int lireInt(String message) {
@@ -195,6 +195,7 @@ public class CircuitAPP {
         boolean presenceProtection = false;
 
         Protection protection = new Protection(0, null); //gérer protection nulle
+        //tester protection***
 
         while (!recommencer) {
 
@@ -308,7 +309,24 @@ public class CircuitAPP {
                     }
                 }
 
-            } else if (option == 3) {
+            }
+            if (option == 3){
+                recommencer = true;
+
+                while(recommencer) {
+                    System.out.println("--- EXPORTATION ---");
+                    File fichier = selectionnerFichier();
+                    if (fichier != null) {
+                        Composant circuit = builder.construireCircuit(fichier.getName());
+                        builder.exporterCSV(circuit, "resultat.csv");
+                    }
+                    numeroSelectionne = lireIntervalle("\n[1] Exporter un autre fichier | [2] Retourner au menu principal", 2);
+                    if (numeroSelectionne == 2) {
+                        recommencer = false;
+                    }
+                }
+
+            } else if (option == 4) {
                 System.out.println("\n===============================================");
                 System.out.println("Fin du programme");
                 System.out.println("===============================================");

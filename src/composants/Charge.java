@@ -44,6 +44,6 @@ public class Charge extends Resistance {
 
     @Override
     public String toString() {
-        return "Numéro de charge: " + this.chargeID + " | " + getNomCharge() + " | " + getResistance() + " Ω | " + TYPE_ENERGIE_RESISTANCE + " | " + getAutreTypeEnergie() + " | " + getVoltage().getValeurVoltage() + "V";
+        return "Numéro de charge: " + this.chargeID + " | Nom: " + getNomCharge() + " | Résistance: " + getResistance() + " Ω | Types d'énergie: " + TYPE_ENERGIE_RESISTANCE + " - " + getAutreTypeEnergie() + " | Différence de potentiel" + getVoltage().getValeurVoltage() + "V\n";
     }
 }

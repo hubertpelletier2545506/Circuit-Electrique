@@ -16,8 +16,8 @@ public abstract class Circuit extends Composant {
     public Circuit(List<Composant> composants, Voltage voltage, Protection protection, boolean interrupteurAllume) {
         setVoltage(voltage);
         setComposants(composants);
-        setProtection(protection);
         setInterrupteurAllume(interrupteurAllume);
+        setProtection(protection);
     }
 
     public Circuit(List<Composant> composants, Voltage voltage, boolean interrupteurAllume) {
@@ -71,11 +71,12 @@ public abstract class Circuit extends Composant {
             this.protection = protection;
         } else{
             if(protection.getTypeProtection() == TypeProtection.DISJONCTEUR){
-                throw new CircuitSauteException("Disjoncteur brûlée! L'ampérage maximal de " + protection.getAmperageMax() + "amp a été dépassé.");
+                System.out.println("Disjoncteur sauté! L'ampérage maximal de " + protection.getAmperageMax() + "A a été dépassé.\nLe circuit est maintenant fermé");
+                setInterrupteurAllume(false);
 
             }
             if(protection.getTypeProtection() == TypeProtection.FUSIBLE){
-                throw new CircuitSauteException("Fusible brûlée! L'ampérage maximal de " + protection.getAmperageMax() + "amp a été dépassé.");
+                throw new CircuitSauteException("Fusible brûlée! L'ampérage maximal de " + protection.getAmperageMax() + "A a été dépassé.");
 
             }
         }
