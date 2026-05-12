@@ -9,6 +9,7 @@ public class Resistance extends Composant {
     private Voltage voltage;
     private int resistanceID;
     private static int numResistance = 0;
+    public final static int RESISTANCE_DEFAUT = 0;
 
     //CONSTANTES
     public static final TypeEnergie TYPE_ENERGIE_RESISTANCE = TypeEnergie.THERMIQUE;
@@ -40,7 +41,12 @@ public class Resistance extends Composant {
     }
 
     private void setResistance(double resistance){
-        this.resistance = resistance;
+        if(resistance >= 0) {
+            this.resistance = resistance;
+        } else{
+            System.out.println("Une résistance ne peut pas avoir une valeur de résistance nulle. Nouvelle valeur de résistance: " + RESISTANCE_DEFAUT + "Ω");
+            setResistance(RESISTANCE_DEFAUT);
+        }
     }
 
     private void setTypeEnergie(TypeEnergie typeEnergie){

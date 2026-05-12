@@ -18,7 +18,7 @@ public class CircuitParallele extends Circuit {
     public double calculerResistance() {
         double resistance = 0;
         if (this.interrupteurAllume == false) {
-            return resistance = 0;
+            return 0;
         } else {
             for (Composant composant : composants) {
                 resistance += 1.0 / composant.calculerResistance();
