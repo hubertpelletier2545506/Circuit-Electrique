@@ -194,9 +194,7 @@ public class CircuitAPP {
         boolean recommencer = false;
         boolean presenceProtection = false;
 
-        Protection protection = new Protection(0, null); //gérer protection nulle
-        //tester protection***
-
+        Protection protection = new Protection(0, null);
         while (!recommencer) {
 
             int option = lireIntervalle(afficherDebutProgramme(), 3);
@@ -298,7 +296,7 @@ public class CircuitAPP {
                         } else {
                             CircuitSerie circuitSerieSansProtection = new CircuitSerie(listeComposants, voltage, true);
                             afficherResultat(circuitSerieSansProtection.calculerResistance(), circuitSerieSansProtection.calculerAmperage(), circuitSerieSansProtection.calculerWattage(), circuitSerieSansProtection.getVoltage());
-                            System.out.println("\nComposantes du circuit: " + listeComposants); //à optimiser et ajouter toString pour listeComposant
+                            System.out.println("\nComposantes du circuit: " + listeComposants);
                         }
 
                         numeroSelectionne = lireIntervalle("\n[1] Créer un autre circuit | [2] Retourner au menu principal", 2);

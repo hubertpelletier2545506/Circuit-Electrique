@@ -26,6 +26,9 @@ public class Protection {
     /** Valeur par défaut de l'ampérage maximal. */
     public final static int AMPERAGE_DEFAUT = 0;
 
+    /** Type de protection par défaut. */
+    private final static TypeProtection TYPE_PROTECTION_DEFAUT = TypeProtection.DISJONCTEUR;
+
     /**
      * Constructeur de la classe Protection.
      *
@@ -68,11 +71,20 @@ public class Protection {
 
     /**
      * Définit le type de protection.
+     * <p>
+     * Si le type de protection est null, on assigne le type de protection par défaut
+     * <p>
      *
      * @param typeProtection le type de protection à définir
      */
     public void setTypeProtection (TypeProtection typeProtection){
-        this.typeProtection = typeProtection;
+
+        if(typeProtection != null){
+            this.typeProtection = typeProtection;
+
+        } else{
+            this.typeProtection = TYPE_PROTECTION_DEFAUT;
+        }
     }
 
     /**

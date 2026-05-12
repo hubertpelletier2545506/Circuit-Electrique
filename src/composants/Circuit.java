@@ -71,7 +71,7 @@ public abstract class Circuit extends Composant {
             this.protection = protection;
         } else{
             if(protection.getTypeProtection() == TypeProtection.DISJONCTEUR){
-                System.out.println("Disjoncteur sauté! L'ampérage maximal de " + protection.getAmperageMax() + "A a été dépassé.\nLe circuit est maintenant fermé");
+                System.out.println("Disjoncteur sauté! L'ampérage maximal de " + protection.getAmperageMax() + "A a été dépassé.\nLe circuit est maintenant fermé.");
                 setInterrupteurAllume(false);
 
             }
