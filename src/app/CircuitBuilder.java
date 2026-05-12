@@ -97,7 +97,7 @@ public class CircuitBuilder {
     }
     public void exporterCSV(Composant composant, String nomFichier) {
         try (PrintWriter writer = new PrintWriter(new File(pathIn + fSep + nomFichier))){
-            writer.println("Type;Resistanc;Voltage");
+            writer.println("Type;Resistance;Voltage");
             ecritureComposantCSV(composant, writer);
             System.out.println("Exportation CSV réussi : " + nomFichier);
         } catch (FileNotFoundException e) {
