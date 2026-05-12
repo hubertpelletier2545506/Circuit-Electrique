@@ -59,6 +59,16 @@ class ProtectionTest {
     }
 
     @Test
+    void setTypeProtectionInvalide(){
+        fusible1.setTypeProtection(null);
+
+        TypeProtection expected=TypeProtection.DISJONCTEUR;
+        TypeProtection actual=fusible1.getTypeProtection();
+
+        assertEquals(expected,actual);
+    }
+
+    @Test
     void getTypeProtection() {
         TypeProtection actual=disj1.getTypeProtection();
         TypeProtection expected=TypeProtection.DISJONCTEUR;
