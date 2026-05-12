@@ -190,6 +190,7 @@ public class CircuitAPP {
         boolean presenceProtection = false;
 
         Protection protection = new Protection(0, null); //gérer protection nulle
+        //tester protection***
 
         while(!recommencer) {
 
