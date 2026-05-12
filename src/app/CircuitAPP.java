@@ -57,7 +57,7 @@ public class CircuitAPP {
         System.out.println("===============================================");
         System.out.println("Menu principal");
         System.out.println("===============================================");
-        System.out.println("Veuillez choisir parmi les deux options suivantes: \n[1] Tester un fichier existant\n[2] Créer un nouveau circuit en série\n[3] Quitter");
+        System.out.println("Veuillez choisir parmi les deux options suivantes: \n[1] Tester un fichier existant\n[2] Créer un nouveau circuit en série\n[3] Exporter un fichier existant\n[4] Quitter");
     }
 
     private static boolean demanderTesterOuRetourner(){
@@ -229,7 +229,16 @@ public class CircuitAPP {
 
             }
 
-            else if (option == 3){
+            if (option == 3){
+                System.out.println("--- EXPORTATION ---");
+                File fichier = selectionnerFichier();
+                if (fichier != null) {
+                    Composant circuit = builder.construireCircuit(fichier.getName());
+                    builder.exporterCSV(circuit, "resultat.csv");
+                }
+            }
+
+            else if (option == 4){
                 System.out.println("===============================================");
                 System.out.println("Fin du programme");
                 System.out.println("===============================================");
