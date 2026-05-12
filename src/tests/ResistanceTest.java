@@ -56,4 +56,5 @@ class ResistanceTest {
         Resistance resistance4 = new Resistance(Voltage.VOLTAGE_STANDARD, 10);
         assertEquals("10.0 Ω | THERMIQUE 120V", resistance4.toString());
     }
+    //todo methode test to string
 }

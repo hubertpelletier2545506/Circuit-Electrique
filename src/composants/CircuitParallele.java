@@ -21,6 +21,7 @@ public class CircuitParallele extends Circuit {
             return 0;
         } else {
             for (Composant composant : composants) {
+                if (composant.calculerResistance()!=0)
                 resistance += 1.0 / composant.calculerResistance();
             }
             return Math.round((1.0 / resistance) * 100.0) / 100.0;
