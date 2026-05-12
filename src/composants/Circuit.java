@@ -14,16 +14,16 @@ public abstract class Circuit extends Composant {
     protected boolean interrupteurAllume;
 
     public Circuit(List<Composant> composants, Voltage voltage, Protection protection, boolean interrupteurAllume) {
-        setVoltage(voltage);
-        setComposants(composants);
-        setInterrupteurAllume(interrupteurAllume);
+        this(composants,voltage,interrupteurAllume);
         setProtection(protection);
+
     }
 
     public Circuit(List<Composant> composants, Voltage voltage, boolean interrupteurAllume) {
         setVoltage(voltage);
         setComposants(composants);
         setInterrupteurAllume(interrupteurAllume);
+        this.calculerAmperage();
     }
 
     private boolean verifierVoltageComposants(){
