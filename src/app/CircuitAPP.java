@@ -6,9 +6,7 @@ import enums.TypeProtection;
 import enums.Voltage;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class CircuitAPP {
     private static final Scanner scanner = new Scanner(System.in);
@@ -21,39 +19,44 @@ public class CircuitAPP {
         File[] fichiers = dossier.listFiles(((dir, name) -> name.endsWith(".json")));
 
         if (fichiers == null || fichiers.length == 0) {
+            System.out.println("Aucun fichier .json trouvé dans le dossier.");
             return null;
+        }
+
+        Map<Integer, File> fichiersDisponibles = new HashMap<>();
+        for (int i = 0; i < fichiers.length; i++) {
+            fichiersDisponibles.put(i + 1, fichiers[i]);
         }
         while (true) {
             System.out.println("--- LISTE DES CIRCUITS ---");
-            for (int i = 0; i < fichiers.length; i++) {
-                System.out.println("[" + (i + 1) + "] " + fichiers[i].getName());
-
+            for (Map.Entry<Integer, File> entry : fichiersDisponibles.entrySet()) {
+                System.out.println("[" + entry.getKey() + "] " + entry.getValue().getName());
             }
             System.out.println("Entrez le numéro du fichier à tester :");
             if (scanner.hasNextInt()) {
-                int fichierALire = scanner.nextInt();
+                int choix = scanner.nextInt();
                 scanner.nextLine();
-
-                if (fichierALire >= 1 && fichierALire <= fichiers.length) {
-                    return fichiers[fichierALire - 1];
+                File fichierChoisi = fichiersDisponibles.get(choix);
+                if (fichierChoisi != null) {
+                    return fichierChoisi;
                 }
             } else {
                 scanner.nextLine();
             }
-            System.out.println("Choix incorrect. Veuillez entrer un chiffre entre 1 et " + fichiers.length + ".");
+            System.out.println("Choix incorrect. Veuillez entrer un chiffre entre 1 et " + fichiersDisponibles.size() + ".");
         }
     }
 
-    private static void afficherResultat(double resistance, double amperage, double wattage, Voltage voltage){
+    private static void afficherResultat(double resistance, double amperage, double wattage, Voltage voltage) {
         System.out.println("===============================================");
         System.out.println(" Différence de potentiel: " + voltage.getValeurVoltage() + "V");
-        System.out.println(" Résistance équivalente: " + String.format("%.2f",resistance) + "Ω");
+        System.out.println(" Résistance équivalente: " + String.format("%.2f", resistance) + "Ω");
         System.out.println(" Ampérage du circuit: " + String.format("%.2f", amperage) + "A");
         System.out.println(" Puissance du circuit: " + String.format("%.2f", wattage) + "W");
         System.out.println("===============================================");
     }
 
-    private static String afficherDebutProgramme(){
+    private static String afficherDebutProgramme() {
 
         return "===============================================\nMenu principal\n===============================================\nVeuillez choisir parmi les deux options suivantes: \n[1] Tester un fichier existant\n[2] Créer un nouveau circuit en série\n[3] Quitter";
     }
@@ -127,13 +130,13 @@ public class CircuitAPP {
         return chaine.toString();
     }
 
-    private static Voltage retournerVoltage(int numeroSelectionne){
+    private static Voltage retournerVoltage(int numeroSelectionne) {
 
-        return Voltage.values()[numeroSelectionne -1];
+        return Voltage.values()[numeroSelectionne - 1];
 
     }
 
-    private static String afficherTypesEnergie (){
+    private static String afficherTypesEnergie() {
 
         StringBuilder chaine = new StringBuilder();
 
@@ -150,13 +153,15 @@ public class CircuitAPP {
 
         return chaine.toString();
 
-    }  private static TypeEnergie retournerTypeEnergie (int numeroSelectionne){
+    }
 
-        return TypeEnergie.values()[numeroSelectionne -1];
+    private static TypeEnergie retournerTypeEnergie(int numeroSelectionne) {
+
+        return TypeEnergie.values()[numeroSelectionne - 1];
 
     }
 
-    private static String afficherProtections(){
+    private static String afficherProtections() {
 
         StringBuilder chaine = new StringBuilder();
 
@@ -175,9 +180,9 @@ public class CircuitAPP {
 
     }
 
-    private static TypeProtection retournerProtection (int numeroSelectionne){
+    private static TypeProtection retournerProtection(int numeroSelectionne) {
 
-        return TypeProtection.values()[numeroSelectionne -1];
+        return TypeProtection.values()[numeroSelectionne - 1];
 
     }
 
@@ -191,7 +196,7 @@ public class CircuitAPP {
 
         Protection protection = new Protection(0, null); //gérer protection nulle
 
-        while(!recommencer) {
+        while (!recommencer) {
 
             int option = lireIntervalle(afficherDebutProgramme(), 3);
 
@@ -215,7 +220,7 @@ public class CircuitAPP {
                     }
 
                     numeroSelectionne = lireIntervalle("\n[1] Tester un autre fichier | [2] Retourner au menu principal", 2);
-                    if(numeroSelectionne == 2){
+                    if (numeroSelectionne == 2) {
                         recommencer = false;
                     }
                 }
@@ -224,83 +229,83 @@ public class CircuitAPP {
 
                 recommencer = true;
 
-                while(recommencer){
+                while (recommencer) {
 
-                System.out.println("\n--- CRÉATION D'UN NOUVEAU CIRCUIT EN SÉRIE ---");
-                System.out.println("\nVeuillez choisir la différence de potentiel du circuit: ");
+                    System.out.println("\n--- CRÉATION D'UN NOUVEAU CIRCUIT EN SÉRIE ---");
+                    System.out.println("\nVeuillez choisir la différence de potentiel du circuit: ");
 
-                afficherVoltage();
-                numeroSelectionne = lireIntervalle(afficherVoltage(), 3);
-                Voltage voltage = retournerVoltage(numeroSelectionne);
+                    afficherVoltage();
+                    numeroSelectionne = lireIntervalle(afficherVoltage(), 3);
+                    Voltage voltage = retournerVoltage(numeroSelectionne);
 
-                int choixProtection = lireIntervalle("\nVoulez-vous ajouter une protection au circuit?\n[1] Oui\n[2] Non", 2);
+                    int choixProtection = lireIntervalle("\nVoulez-vous ajouter une protection au circuit?\n[1] Oui\n[2] Non", 2);
 
-                if (choixProtection == 1) {
+                    if (choixProtection == 1) {
 
-                    System.out.println("\nVeuillez choisir le type de protection");
+                        System.out.println("\nVeuillez choisir le type de protection");
 
-                    numeroSelectionne = lireIntervalle(afficherProtections(), 2);
+                        numeroSelectionne = lireIntervalle(afficherProtections(), 2);
 
-                    TypeProtection typeProtection = retournerProtection(numeroSelectionne);
+                        TypeProtection typeProtection = retournerProtection(numeroSelectionne);
 
-                    int amperageMax = lireInt("\nVeuillez choisir l'ampérage maximal de la protection");
+                        int amperageMax = lireInt("\nVeuillez choisir l'ampérage maximal de la protection");
 
-                    protection.setTypeProtection(typeProtection);
-                    protection.setAmperageMax(amperageMax);
+                        protection.setTypeProtection(typeProtection);
+                        protection.setAmperageMax(amperageMax);
 
-                    presenceProtection = true;
-                }
-
-
-                numeroSelectionne = lireIntervalle("\nVoulez-vous ajouter de nouveaux éléments au circuit?\n[1] Oui, ajouter une nouvelle charge ou résistance\n[2] Non, créer le circuit", 2);
-
-                while (numeroSelectionne == 1) {
-
-                    numeroSelectionne = lireIntervalle("\n[1] Ajouter une résistance\n[2] Ajouter une charge", 2);
-
-                    if (numeroSelectionne == 1) {
-                        System.out.println("\nQuelle est la valeur de résistance de la résistance?");
-                        double valeurResistance = scanner.nextDouble();
-
-                        Resistance resistance = new Resistance(voltage, valeurResistance);
-
-                        listeComposants.add(resistance);
-
-                    } else if (numeroSelectionne == 2) {
-
-                        String nom = lireString("\nQuel est le nom de la charge?");
-
-                        Double valeurResistance = lireDouble("\nQuelle est la valeur de résistance de la charge?");
-
-                        System.out.println("\nEn quel type d'énergie, autre que thermique, la charge transforme-t-elle l'énergie électrique?");
-                        numeroSelectionne = lireIntervalle(afficherTypesEnergie(), 6); //thermique??
-
-                        Charge charge = new Charge(voltage, valeurResistance, retournerTypeEnergie(numeroSelectionne), nom);
-
-                        listeComposants.add(charge);
+                        presenceProtection = true;
                     }
 
-                    numeroSelectionne = lireIntervalle("\n[1] Ajouter un autre élément\n[2] Créer le circuit", 2);
-                }
 
-                if (numeroSelectionne == 2) {
-                    System.out.println("\n--- CRÉATION DU CIRCUIT EN COURS ---\n");
-                    if (presenceProtection) {
-                        CircuitSerie circuitSerieAvecProtection = new CircuitSerie(listeComposants, voltage, protection, true);
-                        afficherResultat(circuitSerieAvecProtection.calculerResistance(), circuitSerieAvecProtection.calculerAmperage(), circuitSerieAvecProtection.calculerWattage(), circuitSerieAvecProtection.getVoltage());
-                        System.out.println("\nComposantes du circuit: " + listeComposants);
-                    } else {
-                        CircuitSerie circuitSerieSansProtection = new CircuitSerie(listeComposants, voltage, true);
-                        afficherResultat(circuitSerieSansProtection.calculerResistance(), circuitSerieSansProtection.calculerAmperage(), circuitSerieSansProtection.calculerWattage(), circuitSerieSansProtection.getVoltage());
-                        System.out.println("\nComposantes du circuit: " + listeComposants); //à optimiser et ajouter toString pour listeComposant
+                    numeroSelectionne = lireIntervalle("\nVoulez-vous ajouter de nouveaux éléments au circuit?\n[1] Oui, ajouter une nouvelle charge ou résistance\n[2] Non, créer le circuit", 2);
+
+                    while (numeroSelectionne == 1) {
+
+                        numeroSelectionne = lireIntervalle("\n[1] Ajouter une résistance\n[2] Ajouter une charge", 2);
+
+                        if (numeroSelectionne == 1) {
+                            System.out.println("\nQuelle est la valeur de résistance de la résistance?");
+                            double valeurResistance = scanner.nextDouble();
+
+                            Resistance resistance = new Resistance(voltage, valeurResistance);
+
+                            listeComposants.add(resistance);
+
+                        } else if (numeroSelectionne == 2) {
+
+                            String nom = lireString("\nQuel est le nom de la charge?");
+
+                            Double valeurResistance = lireDouble("\nQuelle est la valeur de résistance de la charge?");
+
+                            System.out.println("\nEn quel type d'énergie, autre que thermique, la charge transforme-t-elle l'énergie électrique?");
+                            numeroSelectionne = lireIntervalle(afficherTypesEnergie(), 6); //thermique??
+
+                            Charge charge = new Charge(voltage, valeurResistance, retournerTypeEnergie(numeroSelectionne), nom);
+
+                            listeComposants.add(charge);
+                        }
+
+                        numeroSelectionne = lireIntervalle("\n[1] Ajouter un autre élément\n[2] Créer le circuit", 2);
                     }
 
-                    numeroSelectionne = lireIntervalle("\n[1] Créer un autre circuit | [2] Retourner au menu principal", 2);
-                    if(numeroSelectionne == 2){
-                        recommencer = false;
-                    }
+                    if (numeroSelectionne == 2) {
+                        System.out.println("\n--- CRÉATION DU CIRCUIT EN COURS ---\n");
+                        if (presenceProtection) {
+                            CircuitSerie circuitSerieAvecProtection = new CircuitSerie(listeComposants, voltage, protection, true);
+                            afficherResultat(circuitSerieAvecProtection.calculerResistance(), circuitSerieAvecProtection.calculerAmperage(), circuitSerieAvecProtection.calculerWattage(), circuitSerieAvecProtection.getVoltage());
+                            System.out.println("\nComposantes du circuit: " + listeComposants);
+                        } else {
+                            CircuitSerie circuitSerieSansProtection = new CircuitSerie(listeComposants, voltage, true);
+                            afficherResultat(circuitSerieSansProtection.calculerResistance(), circuitSerieSansProtection.calculerAmperage(), circuitSerieSansProtection.calculerWattage(), circuitSerieSansProtection.getVoltage());
+                            System.out.println("\nComposantes du circuit: " + listeComposants); //à optimiser et ajouter toString pour listeComposant
+                        }
 
-                }
+                        numeroSelectionne = lireIntervalle("\n[1] Créer un autre circuit | [2] Retourner au menu principal", 2);
+                        if (numeroSelectionne == 2) {
+                            recommencer = false;
+                        }
+
+                    }
                 }
 
             } else if (option == 3) {
@@ -311,7 +316,7 @@ public class CircuitAPP {
             }
         }
 
-        }
+    }
 
 
 }
