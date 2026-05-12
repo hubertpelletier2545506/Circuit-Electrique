@@ -71,12 +71,12 @@ public abstract class Circuit extends Composant {
             this.protection = protection;
         } else{
             if(protection.getTypeProtection() == TypeProtection.DISJONCTEUR){
-                System.out.println("Disjoncteur sauté! L'ampérage maximal de " + protection.getAmperageMax() + "amp a été dépassé.\nLe circuit est maintenant fermé");
+                System.out.println("Disjoncteur sauté! L'ampérage maximal de " + protection.getAmperageMax() + "A a été dépassé.\nLe circuit est maintenant fermé");
                 setInterrupteurAllume(false);
 
             }
             if(protection.getTypeProtection() == TypeProtection.FUSIBLE){
-                throw new CircuitSauteException("Fusible brûlée! L'ampérage maximal de " + protection.getAmperageMax() + "amp a été dépassé.");
+                throw new CircuitSauteException("Fusible brûlée! L'ampérage maximal de " + protection.getAmperageMax() + "A a été dépassé.");
 
             }
         }

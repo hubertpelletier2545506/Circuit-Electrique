@@ -55,7 +55,7 @@ public class CircuitAPP {
 
     private static String afficherDebutProgramme(){
 
-        return "===============================================\nMenu principal\n===============================================\nVeuillez choisir parmi les deux options suivantes: \n[1] Tester un fichier existant\n[2] Créer un nouveau circuit en série\n[3] Quitter";
+        return "===============================================\nMenu principal\n===============================================\n\nVeuillez choisir parmi les deux options suivantes: \n\n[1] Tester un fichier existant\n[2] Créer un nouveau circuit en série\n[3] Quitter";
     }
 
     public static int lireInt(String message) {
