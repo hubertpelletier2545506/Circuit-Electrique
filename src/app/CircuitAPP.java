@@ -49,10 +49,10 @@ public class CircuitAPP {
 
     private static void afficherResultat(double resistance, double amperage, double wattage, Voltage voltage) {
         System.out.println("===============================================");
-        System.out.println(" Différence de potentiel: " + voltage.getValeurVoltage() + "V");
-        System.out.println(" Résistance équivalente: " + String.format("%.2f", resistance) + "Ω");
-        System.out.println(" Ampérage du circuit: " + String.format("%.2f", amperage) + "A");
-        System.out.println(" Puissance du circuit: " + String.format("%.2f", wattage) + "W");
+        System.out.println(" Différence de potentiel: " + voltage.getValeurVoltage() + " V");
+        System.out.println(" Résistance équivalente: " + String.format("%.2f", resistance) + " Ω");
+        System.out.println(" Ampérage du circuit: " + String.format("%.2f", amperage) + " A");
+        System.out.println(" Puissance du circuit: " + String.format("%.2f", wattage) + " W");
         System.out.println("===============================================");
     }
 
@@ -186,21 +186,15 @@ public class CircuitAPP {
 
     }
 
-    public static String calculerCout(double coutElectricite, double nbHeures, double wattage){
-        double coutFonctionnement = (coutElectricite/100)*nbHeures*(wattage/1000);
-        return String.format("%.2f", coutFonctionnement);
-    }
-
     public static void main(String[] args) {
 
         CircuitBuilder builder = new CircuitBuilder();
         List<Composant> listeComposants = new ArrayList<>();
-        Protection protection = new Protection(0, null);
         int numeroSelectionne;
-        double puissanceCircuit = 0;
         boolean recommencer = false;
         boolean presenceProtection = false;
 
+        Protection protection = new Protection(0, null);
         while (!recommencer) {
 
             int option = lireIntervalle(afficherDebutProgramme(), 4);
@@ -260,8 +254,9 @@ public class CircuitAPP {
 
                     numeroSelectionne = lireIntervalle("\nVoulez-vous ajouter de nouveaux éléments au circuit?\n[1] Oui, ajouter une nouvelle charge ou résistance\n[2] Non, créer le circuit", 2);
 
-                    while (numeroSelectionne == 1) {
+                    listeComposants.clear();
 
+                    while (numeroSelectionne == 1) {
 
                         numeroSelectionne = lireIntervalle("\n[1] Ajouter une résistance\n[2] Ajouter une charge", 2);
 
@@ -270,7 +265,6 @@ public class CircuitAPP {
                             double valeurResistance = scanner.nextDouble();
 
                             Resistance resistance = new Resistance(voltage, valeurResistance);
-
 
                             listeComposants.add(resistance);
 
@@ -297,57 +291,50 @@ public class CircuitAPP {
                             CircuitSerie circuitSerieAvecProtection = new CircuitSerie(listeComposants, voltage, protection, true);
                             afficherResultat(circuitSerieAvecProtection.calculerResistance(), circuitSerieAvecProtection.calculerAmperage(), circuitSerieAvecProtection.calculerWattage(), circuitSerieAvecProtection.getVoltage());
                             System.out.println("\nComposantes du circuit: " + listeComposants);
-                            puissanceCircuit = circuitSerieAvecProtection.calculerWattage();
                         } else {
                             CircuitSerie circuitSerieSansProtection = new CircuitSerie(listeComposants, voltage, true);
                             afficherResultat(circuitSerieSansProtection.calculerResistance(), circuitSerieSansProtection.calculerAmperage(), circuitSerieSansProtection.calculerWattage(), circuitSerieSansProtection.getVoltage());
                             System.out.println("\nComposantes du circuit: " + listeComposants);
-                            puissanceCircuit = circuitSerieSansProtection.calculerWattage();
                         }
 
-                        numeroSelectionne = lireIntervalle("\nVoulez-vous calculer le coût de fonctionnement du circuit?\n[1] Oui\n[2] Non", 2);
-                        if (numeroSelectionne == 1) {
-
-                            double cout = lireDouble("\nQuel est le coût de l'électricité présentement, en ¢/kWh?");
-                            double nbHeures = lireDouble("\nPendant combien d'heures le circuit sera mis en fonction?");
-
-                            System.out.println("\nCoût de fonctionnement du circuit: " + calculerCout(cout, nbHeures, puissanceCircuit) + "$");
-
-                            numeroSelectionne = lireIntervalle("\n[1] Créer un autre circuit | [2] Retourner au menu principal", 2);
-                            if (numeroSelectionne == 2) {
-                                recommencer = false;
-                            }
-
-
-                        }
-                    }
-
-                }
-                if (option == 3) {
-                    recommencer = true;
-
-                    while (recommencer) {
-                        System.out.println("--- EXPORTATION ---");
-                        File fichier = selectionnerFichier();
-                        if (fichier != null) {
-                            Composant circuit = builder.construireCircuit(fichier.getName());
-                            builder.exporterCSV(circuit, "resultat.csv");
-                        }
-                        numeroSelectionne = lireIntervalle("\n[1] Exporter un autre fichier | [2] Retourner au menu principal", 2);
+                        numeroSelectionne = lireIntervalle("\n[1] Créer un autre circuit | [2] Retourner au menu principal", 2);
                         if (numeroSelectionne == 2) {
                             recommencer = false;
                         }
+
                     }
-
-                } else if (option == 4) {
-                    System.out.println("\n===============================================");
-                    System.out.println("Fin du programme");
-                    System.out.println("===============================================");
-                    recommencer = true;
                 }
-            }
 
+            }
+            if (option == 3){
+                recommencer = true;
+
+                while(recommencer) {
+                    System.out.println("--- EXPORTATION ---");
+                    File fichier = selectionnerFichier();
+                    if (fichier != null) {
+                        Composant circuit = builder.construireCircuit(fichier.getName());
+                        if (circuit==null){
+                            System.out.println("L'exportation ne peut pas s'effectuer, car le circuit n'est pas valide");
+                        }else{
+                            builder.exporterCSV(circuit, "resultat.csv");
+                        }
+
+                    }
+                    numeroSelectionne = lireIntervalle("\n[1] Exporter un autre fichier | [2] Retourner au menu principal", 2);
+                    if (numeroSelectionne == 2) {
+                        recommencer = false;
+                    }
+                }
+
+            } else if (option == 4) {
+                System.out.println("\n===============================================");
+                System.out.println("Fin du programme");
+                System.out.println("===============================================");
+                recommencer = true;
+            }
         }
+
     }
 
 
