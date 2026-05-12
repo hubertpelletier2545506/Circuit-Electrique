@@ -4,6 +4,7 @@ import composants.*;
 import enums.TypeEnergie;
 import enums.TypeProtection;
 import enums.Voltage;
+import exception.CircuitSauteException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -154,4 +155,21 @@ class CircuitTest {
 
         assertEquals(expected,actual);
     }
+    @Test
+    void mauvaisVoltageComposantTest(){
+        Charge charge = new Charge(Voltage.VOLTAGE_STANDARD, 10000,TypeEnergie.MECANIQUE, "Moteur");
+        List<Composant> composants = new ArrayList<>();
+        composants.add(charge);
+
+        assertThrows(ArithmeticException.class, () ->new CircuitSerie(composants,Voltage.VOLTAGE_ELEVE,true));
+
+    }
+    @Test
+    void circuitSautePasResistance(){
+        List<Composant> composants=new ArrayList<>();
+
+        assertThrows(CircuitSauteException.class, () -> new CircuitSerie(composants,Voltage.VOLTAGE_ELEVE,true));
+
+    }
+
 }
