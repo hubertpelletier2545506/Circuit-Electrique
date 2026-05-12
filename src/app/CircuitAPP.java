@@ -258,6 +258,8 @@ public class CircuitAPP {
 
                     numeroSelectionne = lireIntervalle("\nVoulez-vous ajouter de nouveaux éléments au circuit?\n[1] Oui, ajouter une nouvelle charge ou résistance\n[2] Non, créer le circuit", 2);
 
+                    listeComposants.clear();
+
                     while (numeroSelectionne == 1) {
 
                         numeroSelectionne = lireIntervalle("\n[1] Ajouter une résistance\n[2] Ajouter une charge", 2);
