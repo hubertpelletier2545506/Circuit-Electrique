@@ -108,9 +108,4 @@ public abstract class Circuit extends Composant {
 
         return voltage.getValeurVoltage()*calculerAmperage();
     }
-
-    public double calculerCout(double coutElectricite, double nbHeures){
-        double cout = coutElectricite*nbHeures*(calculerWattage()/1000);
-        return Math.round(cout * 100.0) / 100.0;
-    }
 }
