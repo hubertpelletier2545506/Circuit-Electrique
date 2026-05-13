@@ -13,6 +13,9 @@ public class CircuitAPP {
     private static final char fSep = File.separatorChar;
     private static final String pathIn = System.getProperty("user.dir") + fSep + "src" + fSep + "donnees" + fSep;
 
+    private static final double PRIX_ELECTRICITE = 0.0711;
+    private static final int VINGT_QUATRE_HEURE = 24;
+
     private static File selectionnerFichier() {
         File dossier = new File(pathIn);
 
@@ -47,15 +50,18 @@ public class CircuitAPP {
         }
     }
 
-    private static void afficherResultat(double resistance, double amperage, double wattage, Voltage voltage) {
+    private static void afficherResultat(double resistance, double amperage, double wattage, Voltage voltage, double cout24h) {
         System.out.println("===============================================");
         System.out.println(" Différence de potentiel: " + voltage.getValeurVoltage() + " V");
         System.out.println(" Résistance équivalente: " + String.format("%.2f", resistance) + " Ω");
         System.out.println(" Ampérage du circuit: " + String.format("%.2f", amperage) + " A");
         System.out.println(" Puissance du circuit: " + String.format("%.2f", wattage) + " W");
+        System.out.println(" Coût estimé (en 24h): " + String.format("%.2f", cout24h) + " $");
         System.out.println("===============================================");
     }
-
+    public static double calculerCout24h(Circuit circuit) {
+        return circuit.calculerCout(PRIX_ELECTRICITE, VINGT_QUATRE_HEURE);
+    }
     private static String afficherDebutProgramme() {
 
         return "===============================================\nMenu principal\n===============================================" +
@@ -209,8 +215,7 @@ public class CircuitAPP {
                 Composant circuit = builder.construireCircuit(fichier.getName());
                 if (circuit != null) {
                     System.out.println("\nRésultat pour : " + fichier.getName() + "\n");
-                    afficherResultat(circuit.calculerResistance(), ((Circuit) circuit).calculerAmperage(), ((Circuit) circuit).calculerWattage(), circuit.getVoltage());
-                }
+                    afficherResultat(circuit.calculerResistance(), ((Circuit) circuit).calculerAmperage(), ((Circuit) circuit).calculerWattage(), circuit.getVoltage(), calculerCout24h((Circuit) circuit));                }
             }
             int choix = lireIntervalle("\n[1] Tester un autre fichier | [2] Retourner au menu principal", 2);
             if (choix == 2) {
@@ -264,7 +269,7 @@ public class CircuitAPP {
                     circuitSerie = new CircuitSerie(listeComposants, voltage, true);
                 }
 
-                afficherResultat(circuitSerie.calculerResistance(), circuitSerie.calculerAmperage(), circuitSerie.calculerWattage(), circuitSerie.getVoltage());
+                afficherResultat(circuitSerie.calculerResistance(), circuitSerie.calculerAmperage(), circuitSerie.calculerWattage(), circuitSerie.getVoltage(), calculerCout24h(circuitSerie));
                 System.out.println("\nComposantes du circuit: " + listeComposants);
 
                 int choixFin = lireIntervalle("\n[1] Créer un autre circuit | [2] Retourner au menu principal", 2);
