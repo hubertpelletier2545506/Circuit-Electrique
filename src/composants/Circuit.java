@@ -88,29 +88,25 @@ public abstract class Circuit extends Composant {
     }
 
     public double calculerAmperage(){
+        if(!interrupteurAllume){
+            return 0;
+        } else {
+            double resistanceEquivalente = calculerResistance();
 
-        try {
-            if(interrupteurAllume == false){
-                return 0;
-            } else {
-
-                return voltage.getValeurVoltage() / calculerResistance();
+            if(resistanceEquivalente == 0) {
+                throw new CircuitSauteException("Le circuit a sauté, il n'y a aucune résistance!");
             }
-        } catch (ArithmeticException exception){
-            throw new CircuitSauteException("Le circuit a sauté, il n'y a aucune résistance!");
-
-
-
+            return voltage.getValeurVoltage() / resistanceEquivalente;
         }
     }
 
     public double calculerWattage(){
 
-        return voltage.getValeurVoltage()*calculerAmperage();
+        return voltage.getValeurVoltage() * calculerAmperage();
     }
 
     public double calculerCout(double coutElectricite, double nbHeures){
-        double cout = coutElectricite*nbHeures*(calculerWattage()/1000);
+        double cout = coutElectricite * nbHeures * (calculerWattage() / 1000.0);
         return Math.round(cout * 100.0) / 100.0;
     }
 }
