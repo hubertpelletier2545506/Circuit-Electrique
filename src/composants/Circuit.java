@@ -26,21 +26,18 @@ public abstract class Circuit extends Composant {
         this.calculerAmperage();
     }
 
-    private boolean verifierVoltageComposants(){
+    private boolean verifierVoltageComposants(List<Composant> composantsAVerifier){
 
-        for (Composant composant : composants){
-
+        for (Composant composant : composantsAVerifier){
             if(composant.getVoltage() != voltage){
                 return false;
             }
         }
-
         return true;
     }
 
     public void setComposants(List<Composant> composants) {
-        this.composants = composants;
-        if(verifierVoltageComposants()){
+        if(verifierVoltageComposants(composants)){
             this.composants = composants;
         } else{
             throw new ArithmeticException("Le voltage d'un des composants est incompatible avec le voltage du circuit");
@@ -88,16 +85,14 @@ public abstract class Circuit extends Composant {
     }
 
     public double calculerAmperage(){
-        if(!interrupteurAllume){
+        if(!interrupteurAllume) {
             return 0;
-        } else {
-            double resistanceEquivalente = calculerResistance();
-
-            if(resistanceEquivalente == 0) {
-                throw new CircuitSauteException("Le circuit a sauté, il n'y a aucune résistance!");
-            }
-            return voltage.getValeurVoltage() / resistanceEquivalente;
         }
+        double resistanceEquivalente = calculerResistance();
+        if(resistanceEquivalente == 0) {
+            throw new CircuitSauteException("Le circuit a sauté, il n'y a aucune résistance!");
+        }
+        return voltage.getValeurVoltage() / resistanceEquivalente;
     }
 
     public double calculerWattage(){

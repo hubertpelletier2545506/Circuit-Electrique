@@ -211,6 +211,10 @@ public class CircuitAPP {
         boolean continuer = true;
         while (continuer) {
             File fichier = selectionnerFichier();
+
+            if(fichier == null){
+                return;
+            }
             if (fichier != null) {
                 Composant circuit = builder.construireCircuit(fichier.getName());
                 if (circuit != null) {
@@ -253,7 +257,7 @@ public class CircuitAPP {
                 } else if (typeComposant == 2) {
                     String nom = lireString("\nQuel est le nom de la charge?");
                     double valeurResistance = lireDouble("\nQuelle est la valeur de résistance de la charge?");
-                    int numEnergie = lireIntervalle("\nEn quel type d'énergie, autre que thermique, la charge transforme-t-elle l'énergie électrique?\n" + afficherTypesEnergie(), TypeEnergie.values().length);
+                    int numEnergie = lireIntervalle("\nEn quel type d'énergie, autre que thermique, la charge transforme-t-elle l'énergie électrique?\n" + afficherTypesEnergie(), getTypesEnergieFiltres().size());
                     listeComposants.add(new Charge(voltage, valeurResistance, retournerTypeEnergie(numEnergie), nom));
                 }
                 numAction = lireIntervalle("\n[1] Ajouter un autre élément\n[2] Créer le circuit", 2);

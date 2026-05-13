@@ -14,10 +14,9 @@ import java.util.List;
 public class CircuitBuilder {
     private static final char fSep = File.separatorChar;
     public static final String pathIn = System.getProperty("user.dir") + fSep +"src" + fSep + "donnees";
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     public Composant construireCircuit (String nomFichier) {
-
-        ObjectMapper mapper = new ObjectMapper();
 
         try{
             JsonNode donneesCircuits = mapper.readTree(new File(pathIn + fSep + nomFichier));
