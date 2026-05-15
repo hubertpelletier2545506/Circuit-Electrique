@@ -2,10 +2,10 @@
   "circuit": {
     "type": "serie",
     "voltage": "VOLTAGE_ELEVE",
-    "protection": { "type": "DISJONCTEUR", "valeur": 60 },
+    "protection": { "type": "DISJONCTEUR", "valeur": 15 },
     "interrupteurAllume": true,
     "composants": [
-      { "type": "resistance", "valeur": 20, "voltage": "VOLTAGE_ELEVE" },
+      { "type": "resistance", "valeur": 2, "voltage": "VOLTAGE_ELEVE" },
       {
         "type": "parallele",
         "voltage": "VOLTAGE_ELEVE",
@@ -13,36 +13,36 @@
         "composants": [
           {
             "type": "serie",
-            "voltage": "VOLTAGE_STANDARD",
+            "voltage": "VOLTAGE_ELEVE",
             "composants": [
-              { "type": "resistance", "valeur": 10, "voltage": "VOLTAGE_STANDARD" },
-              { "type": "resistance", "valeur": 6, "voltage": "VOLTAGE_STANDARD" }
+              { "type": "resistance", "valeur": 5, "voltage": "VOLTAGE_ELEVE" },
+              { "type": "resistance", "valeur": 2.5, "voltage": "VOLTAGE_ELEVE" }
             ]
           },
           {
             "type": "serie",
-            "voltage": "VOLTAGE_BAS",
+            "voltage": "VOLTAGE_ELEVE",
             "interrupteurAllume": true,
             "composants": [
               {
                 "type": "charge",
                 "nom": "Projecteur",
                 "valeur": 3,
-                "voltage": "VOLTAGE_BAS",
+                "voltage": "VOLTAGE_ELEVE",
                 "typeEnergie": "RAYONNANTE"
               },
               {
                 "type": "parallele",
-                "voltage": "VOLTAGE_BAS",
+                "voltage": "VOLTAGE_ELEVE",
                 "composants": [
                   {
                     "type": "charge",
                     "nom": "Four de test",
-                    "valeur": 2,
-                    "voltage": "VOLTAGE_BAS",
+                    "valeur": 10,
+                    "voltage": "VOLTAGE_ELEVE",
                     "typeEnergie": "THERMIQUE"
                   },
-                  { "type": "resistance", "valeur": 4, "voltage": "VOLTAGE_BAS" }
+                  { "type": "resistance", "valeur": 4, "voltage": "VOLTAGE_ELEVE" }
                 ]
               }
             ]
@@ -50,13 +50,13 @@
           {
             "type": "charge",
             "nom": "Centrale",
-            "valeur": 50,
+            "valeur": 20,
             "voltage": "VOLTAGE_ELEVE",
             "typeEnergie": "NUCLEAIRE"
           }
         ]
       },
-      { "type": "resistance", "valeur": 10, "voltage": "VOLTAGE_ELEVE" }
+      { "type": "resistance", "valeur": 1, "voltage": "VOLTAGE_ELEVE" }
     ]
   }
 }
