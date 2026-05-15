@@ -87,28 +87,32 @@ public class CircuitBuilder {
     }
 
     // récursivité ?
-    public void ecritureComposantCSV(Composant composant, PrintWriter writer,boolean estRacine) {
+    public void ecritureComposantCSV(Composant composant, PrintWriter writer) {
         String type = composant.getClass().getSimpleName();
         double resistance = composant.calculerResistance();
         String voltage = composant.getVoltage().toString();
         String cout24hStr = "N/A";
+        String amperage = "N/A";
+        String wattage = "N/A";
 
-        if (estRacine && composant instanceof Circuit) {
+        if (composant instanceof Circuit) {
             double cout24h = ((Circuit) composant).calculerCout(0.0711, 24.0);
             cout24hStr = String.format("%.2f", cout24h) + " $";
+            amperage = String.format(("%.2f"), ((Circuit) composant).calculerAmperage()) + " A";
+            wattage = String.format(("%.2f"), ((Circuit) composant).calculerWattage()) + " W";
         }
 
-        writer.println(type + ";" + resistance + ";" + voltage+ ";" + cout24hStr);
+        writer.println(type + ";" + resistance + ";" + voltage+ ";" + amperage + ";" + wattage + ";" + cout24hStr);
         if (composant instanceof Circuit) {
             for (Composant composantEnfant : ((Circuit) composant).getComposants()) {
-                ecritureComposantCSV(composantEnfant, writer, false);
+                ecritureComposantCSV(composantEnfant, writer);
             }
         }
     }
     public void exporterCSV(Composant composant, String nomFichier) {
         try (PrintWriter writer = new PrintWriter(new File(pathIn + fSep + nomFichier))){
-            writer.println("Type;Resistance;Voltage;Cout24h");
-            ecritureComposantCSV(composant, writer, true);
+            writer.println("Type;Resistance;Voltage;Amperage;Wattage;Cout24h");
+            ecritureComposantCSV(composant, writer);
             System.out.println("Exportation CSV réussi : " + nomFichier);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e.getMessage());
