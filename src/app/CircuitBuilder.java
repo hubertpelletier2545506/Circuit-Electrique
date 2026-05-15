@@ -14,10 +14,9 @@ import java.util.List;
 public class CircuitBuilder {
     private static final char fSep = File.separatorChar;
     public static final String pathIn = System.getProperty("user.dir") + fSep +"src" + fSep + "donnees";
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     public Composant construireCircuit (String nomFichier) {
-
-        ObjectMapper mapper = new ObjectMapper();
 
         try{
             JsonNode donneesCircuits = mapper.readTree(new File(pathIn + fSep + nomFichier));
@@ -88,17 +87,28 @@ public class CircuitBuilder {
     }
 
     // récursivité ?
-    public void ecritureComposantCSV(Composant composant, PrintWriter writer) {
+    public void ecritureComposantCSV(Composant composant, PrintWriter writer,boolean estRacine) {
         String type = composant.getClass().getSimpleName();
         double resistance = composant.calculerResistance();
         String voltage = composant.getVoltage().toString();
+        String cout24hStr = "N/A";
 
-        writer.println(type + ";" + resistance + ";" + voltage);
+        if (estRacine && composant instanceof Circuit) {
+            double cout24h = ((Circuit) composant).calculerCout(0.0711, 24.0);
+            cout24hStr = String.format("%.2f", cout24h) + " $";
+        }
+
+        writer.println(type + ";" + resistance + ";" + voltage+ ";" + cout24hStr);
+        if (composant instanceof Circuit) {
+            for (Composant composantEnfant : ((Circuit) composant).getComposants()) {
+                ecritureComposantCSV(composantEnfant, writer, false);
+            }
+        }
     }
     public void exporterCSV(Composant composant, String nomFichier) {
         try (PrintWriter writer = new PrintWriter(new File(pathIn + fSep + nomFichier))){
-            writer.println("Type;Resistance;Voltage");
-            ecritureComposantCSV(composant, writer);
+            writer.println("Type;Resistance;Voltage;Cout24h");
+            ecritureComposantCSV(composant, writer, true);
             System.out.println("Exportation CSV réussi : " + nomFichier);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e.getMessage());

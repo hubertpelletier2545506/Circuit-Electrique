@@ -3,10 +3,16 @@ package tests;
 import composants.Charge;
 import enums.TypeEnergie;
 import enums.Voltage;
+import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ChargeTest {
+
+    @BeforeEach
+    void setUp(){
+        Charge.resetCompteur();
+    }
 
     @org.junit.jupiter.api.Test
     void getAutreTypeEnergie() {
@@ -25,14 +31,14 @@ class ChargeTest {
         Charge charge3 = new Charge(Voltage.VOLTAGE_STANDARD, 10000,TypeEnergie.MECANIQUE, "Moteur");
         Charge charge4 = new Charge(Voltage.VOLTAGE_STANDARD, 10000,TypeEnergie.RAYONNANTE, "Lumière");
 
-        assertEquals(3, charge3.getChargeID());
-        assertEquals(4, charge4.getChargeID());
+        assertEquals(1, charge3.getChargeID());
+        assertEquals(2, charge4.getChargeID());
 
     }
 
     @org.junit.jupiter.api.Test
     void testToString() {
         Charge charge = new Charge(Voltage.VOLTAGE_STANDARD, 10000,TypeEnergie.MECANIQUE, "Moteur");
-        assertEquals("Numéro de charge: 2 | Moteur | 10000.0 Ω | THERMIQUE | MECANIQUE | 120V", charge.toString());
+        assertEquals("Numéro de charge: 1 | Nom: Moteur | Résistance: 10000.0 Ω | Types d'énergie: THERMIQUE - MECANIQUE | Différence de potentiel 120V\n", charge.toString());
     }
 }

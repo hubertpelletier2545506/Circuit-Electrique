@@ -55,6 +55,6 @@ public class Resistance extends Composant {
 
     @Override
     public String toString() {
-        return "Numéro de charge: " + this.resistanceID + " | Résistance: " + getResistance() + " Ω | Type d'énergie: " + TYPE_ENERGIE_RESISTANCE + " | Différence de potentiel " + getVoltage().getValeurVoltage() + "V\n";
+        return "Numéro de résistance: " + this.resistanceID + " | Résistance: " + getResistance() + " Ω | Type d'énergie: " + TYPE_ENERGIE_RESISTANCE + " | Différence de potentiel " + getVoltage().getValeurVoltage() + "V\n";
     }
 }

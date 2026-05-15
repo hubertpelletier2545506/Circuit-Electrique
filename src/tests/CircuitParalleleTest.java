@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CircuitParalleleTest {
 
     @Test
-    void calculerResistance() {
+    void calculerResistance_InterrupteurAllume() {
         Resistance r =new Resistance(Voltage.VOLTAGE_STANDARD,10);
         Resistance r2= new Resistance(Voltage.VOLTAGE_STANDARD,20);
         List<Composant> composants=new ArrayList<>();
@@ -26,5 +26,26 @@ class CircuitParalleleTest {
         double reponseAttendue= 6.67;
 
         assertEquals(reponseAttendue,resistanceC1);
+    }
+    @Test
+    void calculerResistance_InterrupteurEteint() {
+        List<Composant> composants = new ArrayList<>();
+        composants.add(new Resistance(Voltage.VOLTAGE_STANDARD, 10));
+
+        CircuitParallele circuit = new CircuitParallele(composants, Voltage.VOLTAGE_STANDARD, false);
+
+        assertEquals(0, circuit.calculerResistance());
+    }
+
+    @Test
+    void calculerResistance_AvecComposantZeroOhm() {
+        List<Composant> composants = new ArrayList<>();
+        composants.add(new Resistance(Voltage.VOLTAGE_STANDARD, 10));
+        composants.add(new Resistance(Voltage.VOLTAGE_STANDARD, 0));
+
+        CircuitParallele circuit = new CircuitParallele(composants, Voltage.VOLTAGE_STANDARD, true);
+
+
+        assertEquals(10.0, circuit.calculerResistance());
     }
 }
