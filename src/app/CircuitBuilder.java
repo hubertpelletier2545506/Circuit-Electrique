@@ -86,11 +86,10 @@ public class CircuitBuilder {
         throw new IllegalArgumentException("Type de composant inconnu:" + type);
     }
 
-    // récursivité ?
     public void ecritureComposantCSV(Composant composant, PrintWriter writer) {
         String type = composant.getClass().getSimpleName();
         double resistance = composant.calculerResistance();
-        String voltage = composant.getVoltage().toString();
+        String voltage = composant.getVoltage().toString() + " " + composant.getVoltage().getValeurVoltage() + "V";
         String cout24hStr = "N/A";
         String amperage = "N/A";
         String wattage = "N/A";
