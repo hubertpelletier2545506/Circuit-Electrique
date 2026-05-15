@@ -94,8 +94,10 @@ public abstract class Circuit extends Composant {
                 return 0;
             } else {
 
-                return voltage.getValeurVoltage() / calculerResistance();
+                double reponse = voltage.getValeurVoltage() / calculerResistance();
+                return reponse;
             }
+
         } catch (ArithmeticException exception){
             throw new CircuitSauteException("Le circuit a sauté, il n'y a aucune résistance!");
 
