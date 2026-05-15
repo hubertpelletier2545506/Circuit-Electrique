@@ -160,5 +160,43 @@ class CircuitTest {
         assertThrows(CircuitSauteException.class, () -> new CircuitSerie(composants,Voltage.VOLTAGE_ELEVE,true));
 
     }
+    @Test
+    void disjoncteurSauteTest() {
+        Resistance petiteResistance = new Resistance(Voltage.VOLTAGE_STANDARD, 1);
+        List<Composant> composants = new ArrayList<>();
+        composants.add(petiteResistance);
+
+        CircuitSerie serie = new CircuitSerie(composants, Voltage.VOLTAGE_STANDARD, true);
+
+        Protection petitDisjoncteur = new Protection(10, TypeProtection.DISJONCTEUR);
+        serie.setProtection(petitDisjoncteur);
+
+        assertFalse(serie.getinterrupteurAllume());
+    }
+
+    @Test
+    void fusibleBruleTest() {
+        Resistance petiteResistance = new Resistance(Voltage.VOLTAGE_STANDARD, 1);
+        List<Composant> composants = new ArrayList<>();
+        composants.add(petiteResistance);
+
+        CircuitSerie serie = new CircuitSerie(composants, Voltage.VOLTAGE_STANDARD, true);
+
+        Protection petitFusible = new Protection(10, TypeProtection.FUSIBLE);
+
+        assertThrows(CircuitSauteException.class, () -> serie.setProtection(petitFusible));
+    }
+
+    @Test
+    void calculerAmperageInterrupteurEteintTest() {
+        Resistance r = new Resistance(Voltage.VOLTAGE_STANDARD, 100);
+        List<Composant> composants = new ArrayList<>();
+        composants.add(r);
+        Protection disjoncteur = new Protection(100, TypeProtection.DISJONCTEUR);
+
+        CircuitSerie serie = new CircuitSerie(composants, Voltage.VOLTAGE_STANDARD, disjoncteur, false);
+
+        assertEquals(0.0, serie.calculerAmperage());
+    }
 
 }

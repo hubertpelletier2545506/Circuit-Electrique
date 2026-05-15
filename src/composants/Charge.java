@@ -42,6 +42,10 @@ public class Charge extends Resistance {
         return chargeID;
     }
 
+    public static void resetCompteur() {
+        numCharge = 0;
+    }
+
     @Override
     public String toString() {
         return "Numéro de charge: " + this.chargeID + " | Nom: " + getNomCharge() + " | Résistance: " + getResistance() + " Ω | Types d'énergie: " + TYPE_ENERGIE_RESISTANCE + " - " + getAutreTypeEnergie() + " | Différence de potentiel: " + getVoltage().getValeurVoltage() + "V\n";

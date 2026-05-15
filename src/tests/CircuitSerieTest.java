@@ -14,7 +14,7 @@ class CircuitSerieTest {
 
 
     @org.junit.jupiter.api.Test
-    void calculerResistance() {
+    void calculerResistance_InterrupteurAllume() {
         Resistance r =new Resistance(Voltage.VOLTAGE_STANDARD,10);
         Resistance r2= new Resistance(Voltage.VOLTAGE_STANDARD,20);
         List<Composant> composants=new ArrayList<>();
@@ -29,5 +29,15 @@ class CircuitSerieTest {
         assertEquals(reponseAttendue,resistanceC1);
 
 
+    }
+    @org.junit.jupiter.api.Test
+    void calculerResistance_InterrupteurEteint() {
+        List<Composant> composants = new ArrayList<>();
+        composants.add(new Resistance(Voltage.VOLTAGE_STANDARD, 100));
+
+
+        CircuitSerie c1 = new CircuitSerie(composants, Voltage.VOLTAGE_STANDARD, false);
+
+        assertEquals(0.0, c1.calculerResistance());
     }
 }
