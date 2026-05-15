@@ -16,7 +16,7 @@ public class CircuitSerie extends Circuit {
     @Override
     public double calculerResistance() {
         double resistance = 0;
-        if (this.interrupteurAllume == false) {
+        if (!this.interrupteurAllume) {
             return 0;
         } else {
             for (Composant composant : composants) {

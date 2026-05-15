@@ -86,7 +86,6 @@ public class CircuitBuilder {
         throw new IllegalArgumentException("Type de composant inconnu:" + type);
     }
 
-    // récursivité ?
     public void ecritureComposantCSV(Composant composant, PrintWriter writer,boolean estRacine) {
         String type = composant.getClass().getSimpleName();
         double resistance = composant.calculerResistance();
