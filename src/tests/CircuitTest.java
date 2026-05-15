@@ -166,9 +166,9 @@ class CircuitTest {
     }
     @Test
     void circuitSautePasResistance(){
-        List<Composant> composants=new ArrayList<>();
+        List<Composant> comp=new ArrayList<>();
 
-        assertThrows(CircuitSauteException.class, () -> new CircuitSerie(composants,Voltage.VOLTAGE_ELEVE,true));
+        assertThrows(CircuitSauteException.class, () -> new CircuitSerie(comp,Voltage.VOLTAGE_ELEVE,true));
 
     }
     @Test
